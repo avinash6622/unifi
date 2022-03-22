@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Distributor Management </h3>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="disbmgmt" [(ngModel)]=add value="adddisb" (change)="adddisb($event)">Add
+            Distributor
+            <input type="radio" name="disbmgmt" [(ngModel)]=update value="updatedisb" (change)="updatedisb($event)">Update
+            Distributor
+        </div>
+        <br>
+        <form>
+            <div class="distdetails" *ngIf="isAdddisb">
+                <label for="DistributorName">Distributor Name</label><br>
+                <input type="text" [(ngModel)]="distmanagement.DistributorName" name="DistributorName"><br>
+                <label for="DistributorCode">Distributor Code</label><br>
+                <input type="text" [(ngModel)]="distmanagement.DistributorCode" name="DistributorCode"><br>
+                <label for="rm">RM</label><br>
+                <input type="text" [(ngModel)]="distmanagement.RM" name="RM"><br>
+                <label for="strategy">Applicable Strategy</label><br>
+                <form>
+                    <input type="checkbox" ng-model="myVar" value="BCAD">BCAD
+                    <input type="checkbox" ng-model="myVar" value="AIF">AIF
+                    <input type="checkbox" ng-model="myVar" value="BCAD NEW">BCAD NEW
+                    <input type="checkbox" ng-model="myVar" value="OTHERS">OTHERS<br>
+                </form>
+                <br>
+
+                <label for="disttype">Distributor Type</label><br>
+                <form>
+                    <input type="checkbox" ng-model="myVar" value="National">NATIONAL
+                    <input type="checkbox" ng-model="myVar" value="IFA">IFA
+                    <input type="checkbox" ng-model="myVar" value="Others">OTHERS
+                    </select>
+                </form>
+                <br>
+                <label for="location">Location</label><br>
+                <input type="text" [(ngModel)]="distmanagement.Location" name="Location"><br><br>
+                <button class="btn btn-success" (click)="save()">Save</button>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+            </div>
+            <div class="distdetails" *ngIf="isUpdatedisb">
+                    <label for="DistributorName">Distributor Name</label><br>
+                    <input type="text" [(ngModel)]="distmanagement.DistributorName" name="DistributorName"><br>
+                    <label for="DistributorCode">Distributor Code</label><br>
+                    <input type="text" [(ngModel)]="distmanagement.DistributorCode" name="DistributorCode"><br>
+                    <label for="rm">RM</label><br>
+                    <input type="text" [(ngModel)]="distmanagement.RM" name="RM"><br>
+                    <label for="strategy">Applicable Strategy</label><br>
+                    <form>
+                        <input type="checkbox" ng-model="myVar" value="BCAD">BCAD
+                        <input type="checkbox" ng-model="myVar" value="AIF">AIF
+                        <input type="checkbox" ng-model="myVar" value="BCAD NEW">BCAD NEW
+                        <input type="checkbox" ng-model="myVar" value="OTHERS">OTHERS<br>
+                    </form>
+                    <br>
+    
+                    <label for="disttype">Distributor Type</label><br>
+                    <form>
+                        <input type="checkbox" ng-model="myVar" value="National">NATIONAL
+                        <input type="checkbox" ng-model="myVar" value="IFA">IFA
+                        <input type="checkbox" ng-model="myVar" value="Others">OTHERS
+                        </select>
+                    </form>
+                    <br>
+                    <label for="location">Location</label><br>
+                    <input type="text" [(ngModel)]="distmanagement.Location" name="Location"><br><br>
+                    <button class="btn btn-success" (click)="save()">Save</button>
+                    <button class="btn btn-danger" (click)="reset()">Reset</button>
+            </div>
+            <br>
+        </form>
+        <span>
+
+            <div *ngIf="isSearchFound">
+                <h3>Search Found!!!!</h3>
+            </div>
+        </span>
+        </form>
+    </div>
+</div>
+</div>
+
+<div [style.visibility]="isDisplaydisbutor? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+
+</div>

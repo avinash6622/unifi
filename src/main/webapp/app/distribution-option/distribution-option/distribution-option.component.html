@@ -1,0 +1,56 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[6].roleCreate === true">
+    <button (click)="openAddDialog()" class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add Distributor Option</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>Distributor Option Details</h4>
+</div>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" [class.active]="order === 'optionName'" (click)="setOrder('optionName')">Option Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'product.productName'" (click)="setOrder('product.productName')">Product Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[6].roleEdit === true ||
+                account && account.role.roleNameMasters[6].roleDelete === true">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let distribution of distributions | paginate: { id: 'distoption-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td>{{distribution.optionName}}</td>
+                <td><span *ngIf="distribution.product !== null">{{distribution.product.productName}}</span></td>
+                <td *ngIf="account && account.role.roleNameMasters[6].roleEdit === true ||
+                account && account.role.roleNameMasters[6].roleDelete === true">
+                    <a (click)="openUpdateialog(distribution.id)" queryParamsHandling="merge" *ngIf="account && account.role.roleNameMasters[6].roleEdit === true" data-toggle="tooltip" placement="top" ngbTooltip="Edit">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteDistribution(distribution)" *ngIf="account && account.role.roleNameMasters[6].roleDelete === true">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="distributionList($event)" id="distoption-paginator" *ngIf="distributions.length !== 0"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="distributionList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

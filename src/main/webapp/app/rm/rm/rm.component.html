@@ -1,0 +1,76 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[2].roleCreate === true">
+    <button class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;" routerLink="/rmadd">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add RM</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>RM Master Details</h4>
+</div>
+<form #RmFilterForm="ngForm" name="form" role="form">
+    <div class="row">
+        <div class="col-2">
+            <input [(ngModel)]="relationshipManager.rmName" name="rmName" [typeahead]="rmFilterPrediction" typeaheadOptionField="rmName" placeholder="Filter By rmName" class="form-control" required (ngModelChange)="GetfilterByrmName()">
+        </div>
+    </div>
+</form>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[2].roleEdit === true">
+                    Action
+                </th>
+                <th scope="col" [class.active]="order === 'rmName'" (click)="setOrder('rmName')">RM
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'subRMS.subName'" (click)="setOrder('subRMS.subName')">Sub-RM
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'location.locationName'" (click)="setOrder('location.locationName')">Location
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[2].roleDelete === true">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let relationMaster of relationMasters | paginate: { id: 'rm-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td *ngIf="account && account.role.roleNameMasters[2].roleEdit === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" [routerLink]="['/rm/' + relationMaster?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                    </a>
+                </td>
+                <td>{{ relationMaster.rmName }}</td>
+                <td>
+                    <div *ngFor="let subRM of relationMaster.subRMS">
+                        <p>{{ subRM.subName }}</p>
+                    </div>
+
+                </td>
+                <td><span *ngIf="relationMaster.location !== null">{{ relationMaster.location.locationName }}</span></td>
+                <td *ngIf="account && account.role.roleNameMasters[2].roleDelete === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteRm(relationMaster)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="rmList($event)" id="rm-paginator" *ngIf="PaginationFlag"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="rmList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

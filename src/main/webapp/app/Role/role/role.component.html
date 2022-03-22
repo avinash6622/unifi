@@ -1,0 +1,268 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[4].roleCreate === true">
+    <button class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;" routerLink="/role-add">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add role</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>Role Details</h4>
+</div>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[4].roleEdit === true">
+                    Action
+                </th>
+                <th scope="col" [class.active]="order === 'roleName'" (click)="setOrder('roleName')">Role Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col">Modules</th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[4].roleDelete === true">
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of roles | paginate: { id: 'role-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td *ngIf="account && account.role.roleNameMasters[4].roleEdit === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" [routerLink]="['/role/' + role?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                    </a>
+                </td>
+                <td>{{ role.roleName }}</td>
+                <td>
+                    <div *ngFor="let role of role.roleNameMasters;" style="font-size: 12px;">
+                        <p *ngIf="role.roleName === 'User' && role.roleCreate === true">
+                            User Create
+                        </p>
+                        <p *ngIf="role.roleName === 'User' && role.roleEdit === true">
+                            User Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'User' && role.roleView === true">
+                            User View
+                        </p>
+                        <p *ngIf="role.roleName === 'User' && role.roleDelete === true">
+                            User Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Distributor' && role.roleCreate === true">
+                            Distributor Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Distributor' && role.roleEdit === true">
+                            Distributor Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Distributor' && role.roleView === true">
+                            Distributor View
+                        </p>
+                        <p *ngIf="role.roleName === 'Distributor' && role.roleDelete === true">
+                            Distributor Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Investment' && role.roleCreate === true">
+                            Investment Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Investment' && role.roleEdit === true">
+                            Investment Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Investment' && role.roleView === true">
+                            Investment View
+                        </p>
+                        <p *ngIf="role.roleName === 'Investment' && role.roleDelete === true">
+                            Investment Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'RM' && role.roleCreate === true">
+                            RM Create
+                        </p>
+                        <p *ngIf="role.roleName === 'RM' && role.roleEdit === true">
+                            RM Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'RM' && role.roleView === true">
+                            RM View
+                        </p>
+                        <p *ngIf="role.roleName === 'RM' && role.roleDelete === true">
+                            RM Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'SubRM' && role.roleCreate === true">
+                            Sub-RM Create
+                        </p>
+                        <p *ngIf="role.roleName === 'SubRM' && role.roleEdit === true">
+                            Sub-RM Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'SubRM' && role.roleView === true">
+                            Sub-RM View
+                        </p>
+                        <p *ngIf="role.roleName === 'SubRM' && role.roleDelete === true">
+                            Sub-RM Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Role' && role.roleCreate === true">
+                            Role Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Role' && role.roleEdit === true">
+                            Role Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Role' && role.roleView === true">
+                            Role View
+                        </p>
+                        <p *ngIf="role.roleName === 'Role' && role.roleDelete === true">
+                            Role Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'DistType' && role.roleCreate === true">
+                            Distributor Type Create
+                        </p>
+                        <p *ngIf="role.roleName === 'DistType' && role.roleEdit === true">
+                            Distributor Type Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'DistType' && role.roleView === true">
+                            Distributor Type View
+                        </p>
+                        <p *ngIf="role.roleName === 'DistType' && role.roleDelete === true">
+                            Distributor Type Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'DistributorOption' && role.roleCreate === true">
+                            Distributor Option Create
+                        </p>
+                        <p *ngIf="role.roleName === 'DistributorOption' && role.roleEdit === true">
+                            Distributor Option Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'DistributorOption' && role.roleView === true">
+                            Distributor Option View
+                        </p>
+                        <p *ngIf="role.roleName === 'DistributorOption' && role.roleDelete === true">
+                            Distributor Option Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Location' && role.roleCreate === true">
+                            Location Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Location' && role.roleEdit === true">
+                            Location Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Location' && role.roleView === true">
+                            Location View
+                        </p>
+                        <p *ngIf="role.roleName === 'Location' && role.roleDelete === true">
+                            Location Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Product' && role.roleCreate === true">
+                            Product Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Product' && role.roleEdit === true">
+                            Product Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Product' && role.roleView === true">
+                            Product View
+                        </p>
+                        <p *ngIf="role.roleName === 'Product' && role.roleDelete === true">
+                            Product Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientMaster' && role.roleCreate === true">
+                            Client Master Create
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientMaster' && role.roleEdit === true">
+                            Client Master Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientMaster' && role.roleView === true">
+                            Client Master View
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientMaster' && role.roleDelete === true">
+                            Client Master Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Series' && role.roleCreate === true">
+                            Series Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Series' && role.roleEdit === true">
+                            Series Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Series' && role.roleView === true">
+                            Series View
+                        </p>
+                        <p *ngIf="role.roleName === 'Series' && role.roleDelete === true">
+                            Series Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'CommissionDefinition' && role.roleCreate === true">
+                            Commission Definition Create
+                        </p>
+                        <p *ngIf="role.roleName === 'CommissionDefinition' && role.roleEdit === true">
+                            Commission Definition Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'CommissionDefinition' && role.roleView === true">
+                            Commission Definition View
+                        </p>
+                        <p *ngIf="role.roleName === 'CommissionDefinition' && role.roleDelete === true">
+                            Commission Definition Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'FileUpload' && role.roleCreate === true">
+                            File Upload Approve
+                        </p>
+                        <p *ngIf="role.roleName === 'FileUpload' && role.roleEdit === true">
+                            File Upload Create
+                        </p>
+                        <p *ngIf="role.roleName === 'FileUpload' && role.roleView === true">
+                            File Upload View
+                        </p>
+                        <p *ngIf="role.roleName === 'FileUpload' && role.roleDelete === true">
+                            File Upload Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Payment' && role.roleCreate === true">
+                            Payment Create
+                        </p>
+                        <p *ngIf="role.roleName === 'Payment' && role.roleEdit === true">
+                            Payment Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'Payment' && role.roleView === true">
+                            Payment View
+                        </p>
+                        <p *ngIf="role.roleName === 'Payment' && role.roleDelete === true">
+                            Payment Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'ManagementFee' && role.roleCreate === true">
+                            ManagementFee Create
+                        </p>
+                        <p *ngIf="role.roleName === 'ManagementFee' && role.roleEdit === true">
+                            ManagementFee Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'ManagementFee' && role.roleView === true">
+                            ManagementFee View
+                        </p>
+                        <p *ngIf="role.roleName === 'ManagementFee' && role.roleDelete === true">
+                            ManagementFee Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientfeeCommission' && role.roleCreate === true">
+                            ClientfeeCommission Create
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientfeeCommission' && role.roleEdit === true">
+                            ClientfeeCommission Edit
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientfeeCommission' && role.roleView === true">
+                            ClientfeeCommission View
+                        </p>
+                        <p *ngIf="role.roleName === 'ClientfeeCommission' && role.roleDelete === true">
+                            ClientfeeCommission Delete
+                        </p>
+                        <p *ngIf="role.roleName === 'Report Generation' && role.roleCreate === true">
+                            Report Generation Generate
+                        </p>
+                    </div>
+                </td>
+                <td *ngIf="account && account.role.roleNameMasters[4].roleDelete === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="DeleteRole(role)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="roleList($event)" id="role-paginator" *ngIf="roles.length !== 0"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="roleList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

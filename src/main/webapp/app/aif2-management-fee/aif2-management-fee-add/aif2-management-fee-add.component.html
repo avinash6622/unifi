@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h4 g-color-black g-font-weight-400 g-mt-15" style="margin-left: 60px;">Add Management Fee</h2>
+        </header>
+        <form #aifform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <ng-multiselect-dropdown [placeholder]="'Select Product'" [data]="products" [(ngModel)]="product" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" name="product">
+                </ng-multiselect-dropdown>  {{ product }}
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="aif2SeriesMaster" [(ngModel)]="aif.aif2SeriesMaster">
+                <option [ngValue]="null" selected>Select Series</option>
+                <option *ngFor="let seriesMaster of seriesMasters" [ngValue]="seriesMaster">{{seriesMaster.classType}}</option>
+            </select>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Datepicker" class="form-control" bsDatepicker name="monthYear" id="monthYear" [(ngModel)]="aif.monthYear" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="units" id="units" placeholder="Units" [(ngModel)]="aif.units">
+            </div>
+            <button type="submit" class="btn btn-success">ADD</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

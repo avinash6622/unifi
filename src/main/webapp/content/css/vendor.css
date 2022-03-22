@@ -1,0 +1,16 @@
+/* after changing this file run 'yarn run webpack:build' */
+
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import 'animate.css';
+@import 'style.css';
+@import 'styleop.css';
+@import 'hs.megamenu.css';
+@import 'hamburgers.min.css';
+@import 'unify-components.css';
+@import 'unify-core.css';
+@import 'unify-globals.css';
+@import 'custombox.min.css';
+@import 'theme.css';
+@import 'sweetalert2.css';
+@import './datePicker.css';
+@import '~@ng-select/ng-select/themes/default.theme.css';

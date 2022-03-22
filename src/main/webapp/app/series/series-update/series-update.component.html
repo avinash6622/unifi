@@ -1,0 +1,33 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Update Series</h2>
+        </header>
+        <form #addseriesform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="seriesName" id="seriesName" placeholder="Series Name"
+                    [(ngModel)]="serie.seriesName" (ngModelChange)="fun(serie.seriesName)">
+            </div>
+            <div class="form-group">
+                <select class="form-control"  name="classs" [(ngModel)]="serie.classType"
+                        (ngModelChange)="fun2(serie.classType)" >
+                    <option value="Class A" selected>Class A</option>
+                    <option value="Class B">Class B</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="seriesCode" id="seriesCode" placeholder="Series Code"
+                    [(ngModel)]="serie.seriesCode">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="initPerCost" id="initPerCost" placeholder="Init Per Cost"
+                    [(ngModel)]="serie.initPerCost">
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

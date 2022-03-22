@@ -1,0 +1,88 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[11].roleCreate === true">
+    <button class="btn btn-primary btn-md" style="float: right;
+        margin-top: 10px; margin-bottom: 15px;" routerLink="/cdadd">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add CD</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>Commission Definition Details</h4>
+</div>
+<!-- <div style="margin-top: 30px;" class="alert alert-info" *ngIf="Commission.length === 0">
+    <p>No Commissions Found</p>
+</div> -->
+<div style="margin-top: 30px;" *ngIf="Commission.length !== 0">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[11].roleEdit === true">Action</th>
+                <!-- <th scope="col">Commission Code</th> -->
+                <th scope="col">Commission Name</th>
+                <th scope="col">Tenor Min.Year</th>
+                <th scope="col">Tenor Max.Year</th>
+                <th scope="col">Upfront Per (%)</th>
+                <th scope="col">Trial Per (%)</th>
+                <th scope="col">Adjustment Per (%)</th>
+                <th scope="col">Adjustment Year</th>
+                <th scope="col">Distributor Option</th>
+                <th scope="col">Distributor Commission (%)</th>
+                <th scope="col">Brokerage Commission (%)</th>
+                <th scope="col">Nav Commission (%)</th>
+                <th scope="col">Profit Commission (%)</th>
+                <th scope="col">Product</th>
+                <th scope="col">Location</th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[11].roleDelete === true">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let Commission of Commission | paginate: { id: 'commission-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td *ngIf="account && account.role.roleNameMasters[11].roleEdit === true">
+                    <a [routerLink]="['/cd/' + Commission?.id + '/edit']" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                    </a>
+                </td>
+                <!-- <td>{{Commission.commissionCode}}</td> -->
+                <td>{{Commission.commissionName}}</td>
+                <td>{{Commission.tenorMinYr}}</td>
+                <td>{{Commission.tenorMaxYr}}</td>
+                <td>{{Commission.upfrontper}}</td>
+                <td>{{Commission.trialper}}</td>
+                <td>{{Commission.adjustmentper}}</td>
+                <td>{{Commission.adjustmentyr}}</td>
+                <td>
+
+                    <div *ngIf="Commission.bcadPMS !== 1">
+                        <div *ngFor="let commission of Commission.commissionDefinitionOptionMaps;">
+                            <p style="font-size: 12px;">{{commission.distributorOption.optionName}}-{{commission.feeCalculation}}</p>
+                        </div>
+                    </div>
+                    <span *ngIf="Commission.bcadPMS === 1">-</span>
+                </td>
+                <td>{{Commission.distributorComm}}</td>
+                <td>{{Commission.brokerageComm}}</td>
+                <td>{{Commission.navComm}}</td>
+                <td>{{Commission.profitComm}}</td>
+                <td><span *ngIf="Commission.product !== null">{{Commission.product.productName}}</span></td>
+                <td><span *ngIf="Commission.location !== null">{{Commission.location.locationName}}</span></td>
+                <td *ngIf="account && account.role.roleNameMasters[11].roleDelete === true">
+                    <a (click)="deletecommission(Commission)" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="commissionlist($event)" id="commission-paginator"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="commissionlist($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

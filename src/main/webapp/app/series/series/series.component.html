@@ -1,0 +1,77 @@
+<main>
+    <input id="tab1" type="radio" name="tabs" checked>
+    <label for="tab1">Series Component</label>
+
+    <input id="tab2" type="radio" name="tabs">
+    <label for="tab2">Generic Series Master</label>
+
+    <div id="content1" class="new">
+        <div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[9].roleCreate === true">
+            <button class="btn btn-primary btn-md" style="float: right;
+        margin-top: 10px; margin-bottom: 15px;" routerLink="/seriesadd">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <span class="d-none d-md-inline">Add Series</span>
+        </button>
+        </div>
+        <div style="margin-top: 20px;">
+            <h4>Series Details</h4>
+        </div>
+        <div style="margin-top: 30px;">
+            <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+                <thead>
+                    <tr style="text-align: center;">
+                        <th scope="col" *ngIf="account && account.role.roleNameMasters[9].roleEdit === true">Action</th>
+                        <th scope="col" [class.active]="order === 'seriesName'" (click)="setOrder('seriesName')">Series Name
+                            <span [hidden]="reverse">▼</span>
+                            <span [hidden]="!reverse">▲</span>
+                        </th>
+                        <th scope="col" [class.active]="order === 'seriesCode'" (click)="setOrder('seriesCode')">Series Code
+                            <span [hidden]="reverse">▼</span>
+                            <span [hidden]="!reverse">▲</span>
+                        </th>
+                        <th scope="col">Initial Cost Per Unit</th>
+                        <th scope="col" *ngIf="account && account.role.roleNameMasters[9].roleDelete === true">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr *ngFor="let serie of series | paginate: { id: 'series-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                        <td *ngIf="account && account.role.roleNameMasters[9].roleEdit === true">
+                            <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" [routerLink]="['/series/' + serie?.id + '/edit']">
+                                <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                            </a>
+                        </td>
+                        <td>{{serie.seriesName}}</td>
+                        <td>{{serie.seriesCode}}</td>
+                        <td>{{serie.initPerCost}}</td>
+
+                        <td *ngIf="account && account.role.roleNameMasters[9].roleDelete === true">
+                            <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteSeries(serie)">
+                                <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-5">
+                    <pagination-controls (pageChange)="seriesList($event)" id="series-paginator" *ngIf="series.length !== 0"></pagination-controls>
+                </div>
+                <div class="col-md-2">
+                    <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="seriesList($event)">
+                        <option [ngValue]="10">10</option>
+                        <option [ngValue]="25">25</option>
+                        <option [ngValue]="50">50</option>
+                        <option [ngValue]="100">100</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content2" class="new">
+        <jhi-aif2-series-master></jhi-aif2-series-master>
+    </div>
+    <div id="content3" class="new">
+        <jhi-aif></jhi-aif>
+    </div>
+</main>

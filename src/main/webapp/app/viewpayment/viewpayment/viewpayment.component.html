@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 25%;">View Payment</h2>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #reportform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Distributor</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="viewpayment.distributorMasterList" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true"
+                    name="distributorMasterList">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group" *ngIf="(acctValue && acctValue.distributorMaster === null) && (acctValue && acctValue.relationshipManager === null)">
+                <label>RM</label>
+                <ng-multiselect-dropdown [placeholder]="'Select RM'" [data]="relations" [(ngModel)]="viewpayment.relationshipManagerList" [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="relationshipManagerList">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Start Date</label>
+                        <input type="text" placeholder="StartDate" class="form-control" bsDatepicker name="startdate" id="startdate" [(ngModel)]="viewpayment.startDate" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" (input)="onDateChange($event)" required>
+                    </div>
+                    <div class="col-6">
+                        <label>End Date</label>
+                        <input type="text" placeholder="EndDate" class="form-control" bsDatepicker name="enddate" id="enddate" [(ngModel)]="viewpayment.endDate" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" (input)="onDateChange1($event)" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!reportform.form.valid">Generate</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            <a href="api/payment-dist" *ngIf="viewpayment.distributorMasterList !== undefined && reportStatus=== true"><button type="button" class="btn btn-primart">Download</button></a>
+            <a href="api/payment-rm" *ngIf="viewpayment.relationshipManagerList !== undefined && reportStatus=== true"><button type="button" class="btn btn-primart">Download</button></a>
+        </form>
+    </div>
+</div>

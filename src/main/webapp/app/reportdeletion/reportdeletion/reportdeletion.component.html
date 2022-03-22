@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 25%;">Report deletion</h2>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #reportform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Distributor</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="report.distributorMasterList" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true"
+                    name="distributorMasterList">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <label>RM</label>
+                <ng-multiselect-dropdown [placeholder]="'Select RM'" [data]="relations" [(ngModel)]="report.relationshipManagerList" [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="relationshipManagerList">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Start Date</label>
+                        <input type="text" placeholder="StartDate" class="form-control" bsDatepicker name="startdate" id="startdate" [(ngModel)]="report.startDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange($event)" required>
+                    </div>
+                    <div class="col-6">
+                        <label>End Date</label>
+                        <input type="text" placeholder="EndDate" class="form-control" bsDatepicker name="enddate" id="enddate" [(ngModel)]="report.endDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange1($event)" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!reportform.form.valid">Generate</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

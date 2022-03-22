@@ -1,0 +1,12 @@
+.row {
+    margin-left: 280px;
+    margin-top: 20px;
+}
+
+input,
+.form-control {
+    width: 60%;
+    text-align: left;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}

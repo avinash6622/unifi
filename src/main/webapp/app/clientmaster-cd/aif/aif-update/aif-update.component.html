@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Update AIF Client</h2>
+        </header>
+        <form #aifform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="clientCode" id="clientCode" placeholder="Client Code"
+                    [(ngModel)]="aif.clientCode">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="clientName" id="clientName" placeholder="Client Name"
+                    [(ngModel)]="aif.clientName">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="PanNumber" id="PanNumber" placeholder="PanNumber"
+                    [(ngModel)]="aif.panNumber">
+            </div>
+            <!-- <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="typeName" id="typeName" placeholder="AIFCommission"
+                    [(ngModel)]="aif.aifClientMaster">
+            </div> -->
+            <div class="form-group">
+                <select class="form-control"  name="distMaster" [(ngModel)]="aif.distributorMaster.id">
+                    <option [ngValue]="null" selected>Select DistributorMaster</option>
+                    <option *ngFor="let distMaster of distributorMasters" [ngValue]="distMaster.id">{{distMaster.distName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control"  name="relationshipManager" [(ngModel)]="aif.relationshipManager.id">
+                    <option [ngValue]="null" selected>Select RM</option>
+                    <option *ngFor="let relationshipManager of relations" [ngValue]="relationshipManager.id">{{relationshipManager.rmName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <select class="form-control"  name="subRM" [(ngModel)]="aif.subRM.id">
+                    <option [ngValue]="null" selected>Select subRM</option>
+                    <option *ngFor="let subRM of subRMs" [ngValue]="subRM.id">{{subRM.subName}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Update</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

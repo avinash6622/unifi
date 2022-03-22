@@ -1,0 +1,99 @@
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <header class="col-md-1">
+            <h4 class="h4 g-color-black g-font-weight-200">
+                Redemption
+            </h4>
+        </header>
+        <form #redemptionform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" placeholder="Redemption date" class="form-control" bsDatepicker name="subscriptionDate" id="subscriptionDate" [(ngModel)]="redemption.subscriptionDate" [bsConfig]="{dateInputFormat: 'DD-MMM-YYYY'}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <ng-multiselect-dropdown [placeholder]="'Select Series'" [data]="seriesMasters" [(ngModel)]="serieMaster" [settings]="dropdownSettings" (onSelect)="onItemSelect($event, i)" (onDeSelect)="onItemDeSelect($event)" name="seriesMaster">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" placeholder="Cost Of Unit" class="form-control" name="navAsOn" id="navAsOn" [(ngModel)]="redemption.navAsOn" [disabled]="disabledValue">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Subscribe</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                </div>
+                <div class="container-fluid">
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 180px;">Client Code</th>
+                                        <th style="width: 180px;">Client Name</th>
+                                        <th style="width: 150px;">Distributor</th>
+                                        <th style="width: 150px;">Closing Units</th>
+                                        <th style="width: 150px;">Portfolio Value</th>
+                                        <th style="width: 150px;">No Of RedemptingUnit</th>
+                                        <th style="width: 150px;">Cost Of RedemptingUnit</th>
+                                        <th style="width: 150px;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let clientCode of redemption.clients; let i = index; let last = last">
+                                        <td>
+                                            <ng-multiselect-dropdown [placeholder]="'Client Code'" [data]="aifClientMasters" [(ngModel)]="clientCode.aifClientMaster" [settings]="dropdownSettings1" (onSelect)="onItemSelect1($event, i)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="aifClientMaster-{{i}}"
+                                                id="aifClientMaster-{{i}}" [ngModelOptions]="{standalone: true}">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                        <td>
+                                            <ng-multiselect-dropdown [placeholder]="'Client Name'" [data]="aifClientMasters" [(ngModel)]="clientCode.aifClientMaster1" [settings]="dropdownSettings2" (onSelect)="onItemSelect2($event, i)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="aifClientMaster1-{{i}}"
+                                                id="aifClientMaster1-{{i}}" [ngModelOptions]="{standalone: true}">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Distributor" class="form-control" name="aifDist-{{i}}" id="aifDist-{{i}}" [(ngModel)]="clientCode.aifDist" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Closing Units" class="form-control" name="closingUnits-{{i}}" id="closingUnits-{{i}}" [(ngModel)]="clientCode.closingUnits" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Portfolio Value" class="form-control" name="protfolioValue-{{i}}" id="protfolioValue-{{i}}" [(ngModel)]="clientCode.protfolioValue" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="No Of Redemptin Units" class="form-control" name="noOfRedemptingUnit-{{i}}" id="noOfRedemptingUnit-{{i}}" [(ngModel)]="clientCode.noOfRedemptingUnit" [ngModelOptions]="{standalone: true}" (keyup)="onValueChange($event, i)">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Cost Of Redempting Unit" class="form-control" name="costOfRedemptingUnit-{{i}}" id="costOfRedemptingUnit-{{i}}" [(ngModel)]="clientCode.costOfRedemptingUnit" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <button class="btn btn-default" *ngIf="last" type="button" (click)="addFieldValue(i)">Add Field</button>
+                                            <button class="btn btn-default" *ngIf="!last" type="button" (click)="deleteFieldValue(i)">
+                                    Delete Field
+                                </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="row">
+  <div class="col-md-3">
+    <jhi-app-usermanagement></jhi-app-usermanagement>
+  </div>
+  <div class="col-md-8">
+    <div>
+      <h3>Add User</h3>
+    </div>
+    <form>
+      <div class="userDetails">
+        <input type="text" name="login" [(ngModel)]="user.login" placeholder="User Name" required><br>
+        <!-- <label class="new-label"> First Name:</label> -->
+        <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name" required><br>
+        <!-- <label class="new-label">Last Name:</label> -->
+        <input type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name"><br>
+        <!-- <label class="new-label">Email:</label> -->
+        <input type="email" name="email" [(ngModel)]="user.email" placeholder="Email" required><br>
+        <!-- <label class="new-label">Password:</label> -->
+        <input type="password" name="password" [(ngModel)]="user.password" placeholder="Password" required><br><br>
+        <label>User Role</label>
+        <select class="form-control" multiple name="authority" [(ngModel)]="user.authorities">
+          <option *ngFor="let authority of authorities" [value]="authority">{{authority}}</option>
+        </select>
+        <br>
+          <label>Distributors</label>
+          <select class="form-control"  name="dist" [(ngModel)]="user.distributorMaster">
+              <option *ngFor="let dist of distributors" [value]="dist | json">{{dist.distName}}</option>
+          </select>
+          <br>
+        <label>RM</label>
+        <select class="form-control"  name="rm" [(ngModel)]="user.relationshipManager">
+            <option *ngFor="let rm of relations" [value]="rm | json">{{rm.rmName}}</option>
+        </select>
+        <br>
+        <label>Sub-RM</label>
+        <select class="form-control"  name="subrm" [(ngModel)]="user.subRM">
+            <option *ngFor="let sub of subRMs" [value]="sub | json">{{sub.subRMName}}</option>
+        </select>
+        <br>
+        <button class="btn btn-success" (click)="save()">Save</button>
+        <button class="btn btn-danger">Reset</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Update Client Master</h2>
+        </header>
+        <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                       name="typeName" id="typeName" placeholder="PMS ClientMaster"
+                       [(ngModel)]="clientfee.clientId.clientName">
+            </div>
+            <!-- <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                    name="pmsClientMaster" id="pmsClientMaster" placeholder="Distributor Master"
+                    [(ngModel)]="clientfees.pmsClientMaster.distributorMaster.distName">
+            </div>  -->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover"-->
+<!--                       name="brokerageComm" id="brokerageComm" placeholder="Brokerage Commission"-->
+<!--                       [(ngModel)]="clientfee.brokerageComm">-->
+<!--            </div>-->
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                       name="profitComm" id="profitComm" placeholder="Profit Commission"
+                       [(ngModel)]="clientfee.profitComm">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                       name="navComm" id="navComm" placeholder="Nav Commission"
+                       [(ngModel)]="clientfee.navComm">
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="bcadPMS"
+                                   [value]="0"
+                                   [(ngModel)]="clientfee.updateRequired" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                            changeable
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="bcadPMS"
+                                   [value]="1"
+                                   [(ngModel)]="clientfee.updateRequired" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                            static
+                        </label>
+                    </div>
+                </div>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover"-->
+<!--                       name="aifComm" id="aifComm" placeholder="AIF Commission"-->
+<!--                       [(ngModel)]="clientfee.aifComm">-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover"-->
+<!--                       name="corpusComm" id="corpusComm" placeholder="Corpus Commission"-->
+<!--                       [(ngModel)]="clientfee.corpusComm">-->
+<!--            </div>-->
+            <button type="submit" class="btn btn-success">Update</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

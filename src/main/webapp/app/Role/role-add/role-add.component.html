@@ -1,0 +1,90 @@
+<div class="row justify-content-center">
+    <div class="col-12">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Add Role</h2>
+        </header>
+        <form #roleaddform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2 offset-md-2">
+                        <label class="form-check-inline u-check g-pl-25">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="selectAll"
+                            id="selectAll" [(ngModel)]="selectAll" (change)="checkIfAllSelected()">
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            Select All
+                        </label>
+                    </div>                    
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-2 offset-md-2">
+                        <p>Role Name</p>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="roleName" id="roleName" placeholder="Role Name"
+                        [(ngModel)]="role.roleName">
+                    </div>
+                </div>
+            </div>
+            <div class="g-mb-5" *ngFor="let role of role.roleNameMasters; let i = index">
+                <div class="row">
+                    <div class="col-md-2 offset-md-2">
+                        <p>{{role.roleName}}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-check-inline u-check g-pl-25" *ngIf="role.roleName !== 'Report Generation'">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="roleCreate-{{i}}"
+                            id="roleCreate-{{i}}" [(ngModel)]="role.roleCreate" checked>
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            <span *ngIf="role.roleName !== 'FileUpload'">Create</span><span *ngIf="role.roleName === 'FileUpload'">Approver</span>
+                        </label>
+                        <label class="form-check-inline u-check g-pl-25" *ngIf="role.roleName !== 'Report Generation'">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="roleEdit-{{i}}"
+                            id="roleEdit-{{i}}" [(ngModel)]="role.roleEdit" checked>
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            Edit
+                        </label>
+                        <label class="form-check-inline u-check g-pl-25" *ngIf="role.roleName !== 'Report Generation'">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="roleView-{{i}}"
+                            id="roleView-{{i}}" [(ngModel)]="role.roleView" checked>
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            View
+                        </label>
+                        <label class="form-check-inline u-check g-pl-25" *ngIf="role.roleName !== 'Report Generation'">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="roleDelete-{{i}}"
+                            id="roleDelete-{{i}}" [(ngModel)]="role.roleDelete" checked>
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            Delete
+                        </label>
+                        <label class="form-check-inline u-check g-pl-25" *ngIf="role.roleName === 'Report Generation'">
+                            <input class="g-hidden-xs-up g-pos-abs g-top-0 g-left-0"  type="checkbox" name="roleDelete-{{i}}"
+                            id="roleDelete-{{i}}" [(ngModel)]="role.roleCreate" checked>
+                            <div class="u-check-icon-checkbox-v6 g-absolute-centered--y g-left-0">
+                            <i class="fa" data-check-icon=""></i>
+                            </div>
+                            Generate
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 offset-md-2">
+                    <button type="submit" class="btn btn-success">ADD</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

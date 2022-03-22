@@ -1,0 +1,156 @@
+# ===================================================================
+# Spring Boot configuration for the "dev" profile.
+#
+# This configuration overrides the application.yml file.
+#
+# More information on profiles: https://www.jhipster.tech/profiles/
+# More information on configuration properties: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+logging:
+    level:
+        ROOT: DEBUG
+        io.github.jhipster: DEBUG
+        com.bcad.application: DEBUG
+
+spring:
+    profiles:
+        active: dev
+        include: swagger
+    devtools:
+        restart:
+            enabled: true
+        livereload:
+            enabled: false # we use Webpack dev server + BrowserSync for livereload
+    jackson:
+        serialization.indent_output: true
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:mysql://localhost:3306/bcad?useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+
+
+        username: root
+        password: root
+        hikari:
+            data-source-properties:
+                cachePrepStmts: true
+                prepStmtCacheSize: 250
+                prepStmtCacheSqlLimit: 2048
+                useServerPrepStmts: true
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: MYSQL
+        show-sql: true
+        properties:
+            hibernate.id.new_generator_mappings: true
+            hibernate.cache.use_second_level_cache: true
+            hibernate.cache.use_query_cache: false
+            hibernate.generate_statistics: true
+            hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
+    liquibase:
+        contexts: dev
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: avinashpandian79@gmail.com
+        password: njlvjvdanliiahyt
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
+            connectiontimeout: 180000
+            timeout: 180000
+    messages:
+        cache-duration: PT1S # 1 second, see the ISO 8601 standard
+    thymeleaf:
+        cache: false
+    servlet:
+        multipart:
+            max-file-size: 10Mb
+            max-request-size: 100Mb
+
+# ===================================================================
+# To enable SSL, generate a certificate using:
+# keytool -genkey -alias bcad -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+#
+# You can also use Let's Encrypt:
+# https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
+#
+# Then, modify the server.ssl properties so your "server" configuration looks like:
+#
+# server:
+#    port: 8443
+#    ssl:
+#        key-store: keystore.p12
+#        key-store-password: <your-password>
+#        key-store-type: PKCS12
+#        key-alias: bcad
+# ===================================================================
+server:
+    port: 8080
+    servlet:
+        session:
+            timeout: 18000
+    cookie:
+        max-age: 18000
+
+
+# ===================================================================
+# JHipster specific properties
+#
+# Full reference is available at: https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+jhipster:
+    http:
+        version: V_1_1 # To use HTTP/2 you will need SSL support (see above the "server.ssl" configuration)
+    cache: # Cache configuration
+        ehcache: # Ehcache configuration
+            time-to-live-seconds: 180000 # By default objects stay 1 hour in the cache
+            max-entries: 100 # Number of objects in each cache entry
+    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
+    cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+        allowed-headers: "*"
+        exposed-headers: "Link,X-Total-Count"
+        allow-credentials: true
+        max-age: 180000
+    security:
+        remember-me:
+            # security key (this key should be unique for your application, and kept secret)
+            key: a6465a6d283cd12c5e36ba50cf00662d7243691b
+    mail: # specific JHipster mail property, for standard properties see MailProperties
+        from: BCAD@localhost
+        base-url: http://192.168.1.66:8080
+    metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
+        jmx:
+            enabled: true
+        logs: # Reports Dropwizard metrics in the logs
+            enabled: false
+            report-frequency: 60 # in seconds
+    logging:
+        logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+            enabled: false
+            host: localhost
+            port: 5000
+            queue-size: 512
+
+# ===================================================================
+# Application specific properties
+# Add your own application properties here, see the ApplicationProperties class
+# to have type-safe configuration, like in the JHipsterProperties above
+#
+# More documentation is available at:
+# https://www.jhipster.tech/common-application-properties/
+# ===================================================================
+
+# application:

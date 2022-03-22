@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h5>Commission Definition (CD) Management </h5>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="cdmgmt" [(ngModel)]="add" value="addstrategy" (change)="addstrategy($event)">Add
+            Strategy
+            <input type="radio" name="cdmgmt" [(ngModel)]="update" value="updatestrategy" (change)="updatestrategy($event)">Update
+            Strategy
+        </div>
+        
+        <div class="clientdetails"   *ngIf="isAddstrategy">
+            
+            <label for="CD Code">CD Code</label>
+            <input type="text" [(ngModel)]="Commission.CDcode" name="CDcode" required>
+            <label for="CD Name">CD Name</label>
+            <input type="text" [(ngModel)]="Commission.CDname" name="CDname" required><br>
+            <button class="btn btn-success" (click)="save(isEdit)">Save</button>
+            <button class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+            <div class="clientdetail"  *ngIf="isAddstrategy">  
+        <label for="Distributor">Distributor</label>
+        <select ng-model="Commission.Distributor">
+            <option value="blank">
+          </select><br>
+         
+        <label for="RM">RM</label>
+        <select ng-model="Commission.RM">
+            <option value="blank">
+          </select><br>
+         
+        <label for="Strategy">Strategy</label>
+        <select ng-model="Commission.Strategy">
+            <option value="blank">
+          </select><br>
+         
+        <label for="Location">Location</label>
+          <input type="text" [(ngModel)]="Commission.Location" name="Location"><br>
+        <label for="Client">Client</label>
+        <select ng-model="Commission.Client">
+            <option value="blank">
+          </select><br>
+        
+        <label for="Tenor">Client</label>
+        <select ng-model="Commission.Tenor">
+            <option value="blank">
+          </select>
+          <select ng-model="Commission.Tenor">
+            <option value="blank">
+          </select><br>
+         
+        <label for="Fee">Fee</label>
+            <input type="radio" ng-model="myVar" value="Management">Management
+            <input type="radio" ng-model="myVar" value="Performance">Performance
+            <input type="radio" ng-model="myVar" value="Others">Others<br>
+        <label for="Payment Adjustment">Payment Adjustment</label>
+            <form>
+            <input type="checkbox" ng-model="myVar" value="Upfront">Upfront  Upfront in %<br> 
+            <input type="checkbox" ng-model="myVar" value="Trial">Trial<br> 
+            <input type="checkbox" ng-model="myVar" value="Adjustment in %">Adjustment in %<br> 
+            <input type="checkbox" ng-model="myVar" value="Adjustment yrs">Adjustment yrs<br> 
+            </form>
+            <br>
+      
+</div>
+<div class="clientdetails" *ngIf="isUpdatestrategy">
+            
+    <label for="CD Code">CD Code</label>
+    <input type="text" [(ngModel)]="Commission.CDcode" name="CDcode" required>
+    <label for="CD Name">CD Name</label>
+    <input type="text" [(ngModel)]="Commission.CDname" name="CDname" required><br>
+    <button class="btn btn-success" (click)="search(isEdit)">Search</button>
+    <button class="btn btn-danger" (click)="clear()">Clear</button>
+</div>
+    
+    </div>
+</div>
+<div [style.visibility]="isDisplaystrategy ? 'visible' :'hidden'">
+    <label>CD Code</label>
+    <input type="text">
+
+    <label>CD Name</label>
+    <input type="text">
+</div>

@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>RM Management</h3>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="rmmgmt" [(ngModel)]=add value="addrm" (change)="addrm($event)">Add RM
+            <input type="radio" name="rmmgmt" [(ngModel)]=update value="updaterm" (change)="updaterm($event)">Update RM
+        </div>
+        <br>
+        <form>
+            <div class="rmdetails" *ngIf="isAddrm">
+                <label for="RMName">RM Name</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.RMName" name="RMName"><br>
+                <label for="RM Code">RM Code</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.RMCode" name="RMCode"><br>
+                <label for="SubRM">Sub RM</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.SubRM" name="SubCode"><br>
+                <label for="Location">Location</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.Location" name="Location"><br>
+                <label for="Applicable Strategy">Applicable Strategy</label>
+                <input type="checkbox" ng-model="myVar" value="BCAD">BCAD
+                <input type="checkbox" ng-model="myVar" value="BCAD01">BCAD01
+                <input type="checkbox" ng-model="myVar" value="BCAD02">BCAD02
+                <input type="checkbox" ng-model="myVar" value="OTHERS">OTHERS
+                <br>
+                <button class="btn btn-success" (click)="save()">Save</button>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+            </div>
+            <div class="rmdetails" *ngIf="isUpdaterm">
+                <label for="RMName">RM Name</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.RMName" name="RMName"><br>
+                <label for="RM Code">RM Code</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.RMCode" name="RMCode"><br>
+                <label for="SubRM">Sub RM</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.SubRM" name="SubCode"><br>
+                <label for="Location">Location</label><br>
+                <input type="text" [(ngModel)]="rmmamagement.Location" name="Location"><br>
+                <label for="Applicable Strategy">Applicable Strategy</label>
+                <input type="checkbox" ng-model="myVar" value="BCAD">BCAD
+                <input type="checkbox" ng-model="myVar" value="BCAD01">BCAD01
+                <input type="checkbox" ng-model="myVar" value="BCAD02">BCAD02
+                <input type="checkbox" ng-model="myVar" value="OTHERS">OTHERS
+                <br>
+                <button class="btn btn-success" (click)="save()">Save</button>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+
+</div>
+<div *ngIf="isUpdaterm">
+
+
+
+    <label for="RMName">RM Name</label>
+    <input type="text" [(ngModel)]="rmmamagement.RMName" name="RMName"><br>
+    <label for="RMCode">RM Code</label>
+    <input type="text" [(ngModel)]="rmmamagement.RMCode" name="RMCode"><br>
+    <button class="btn btn-success" (click)="Search()">Search</button>
+    <button class="btn btn-danger" (click)="Clear()">Clear</button>
+</div>
+</form>
+<span>
+    <div *ngIf="isSearchFound">
+        <h3>Search Found!!!!</h3>
+    </div>
+</span>
+</form>
+</div>
+</div>
+</div>
+
+<div [style.visibility]="isDisplayRM ? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+
+</div>

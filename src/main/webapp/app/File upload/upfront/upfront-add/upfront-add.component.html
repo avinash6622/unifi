@@ -1,0 +1,45 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Add Uploads</h2>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #uploadAdd="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <select
+                    class="form-control g-brd-primary--hover"
+                    [(ngModel)]="upload.fileName"
+                    id="fileName"
+                    name="fileName"
+                    pattern="[0-9A-Za-z ]*">
+                    <option value="Upfront Fee" selected>Upfront Fee</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="file" name="fileupload" (change)="fileChange($event)" id="fileupload" fileupload="ngModel" required>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="StartDate" class="form-control"
+                        bsDatepicker name="startdate" id="startdate"
+                        [(ngModel)]="upload.startDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}"  
+                        (input)="onDateChange($event)" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="EndDate" class="form-control"
+                        bsDatepicker name="endDate" id="endDate"
+                        [(ngModel)]="upload.endDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}"  
+                        (input)="onDateChange1($event)" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success"
+            [disabled]="!uploadAdd.form.valid">ADD</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            <a href="api/download-pms-error-upfront" *ngIf="uploadUpfrontStatus=== true"><button type="button" class="btn btn-primary">Download Error</button></a>
+        </form>
+    </div>
+</div>

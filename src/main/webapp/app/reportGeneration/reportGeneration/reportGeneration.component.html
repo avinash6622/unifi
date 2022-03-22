@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 25%;">Report Generation</h2>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #reportform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Distributor</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="reportGeneration.distributorMaster" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true"
+                    name="distributorMaster">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group" *ngIf="(acctValue && acctValue.distributorMaster === null) && (acctValue && acctValue.relationshipManager === null)">
+                <label>RM</label>
+                <ng-multiselect-dropdown [placeholder]="'Select RM'" [data]="relations" [(ngModel)]="reportGeneration.relationshipManager" [settings]="dropdownSettings1" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="relationshipManager">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-6">
+                        <label>Start Date</label>
+                        <input type="text" placeholder="StartDate" class="form-control" bsDatepicker name="startdate" id="startdate" [(ngModel)]="reportGeneration.startDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange($event)" required>
+                    </div>
+                    <div class="col-6">
+                        <label>To Date</label>
+                        <input type="text" placeholder="EndDate" class="form-control" bsDatepicker name="todate" id="todate" [(ngModel)]="reportGeneration.toDate" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange1($event)" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>AIF Calculations</label><br>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio1">
+                    <input type="radio" class="form-check-input" id="radio1" name="radio1" value="Management"
+                    [(ngModel)]="reportGeneration.aifCalculation">Management
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio2">
+                    <input type="radio" class="form-check-input" id="radio2" name="radio2" value="Performance" [(ngModel)]="reportGeneration.aifCalculation">Performance
+                  </label>
+                </div>
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="radio3">
+                    <input type="radio" class="form-check-input" id="radio3" name="radio3" value="Both"
+                    [(ngModel)]="reportGeneration.aifCalculation">Both
+                  </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!reportform.form.valid">Generate</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            <a href="api/download" *ngIf="reportGeneration.relationshipManager === null && reportStatus=== true"><button type="button" class="btn btn-primart">Download</button></a>
+            <a href="api/downloadRm" *ngIf="reportGeneration.relationshipManager !== null && reportStatus=== true"><button type="button" class="btn btn-primart">Download</button></a>
+        </form>
+    </div>
+</div>

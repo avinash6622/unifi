@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-8">
+    <div>
+      <h3>Master Upload</h3>
+    </div>
+    <form>
+      <div class="roleDetails">
+          <label for="mastertype">Master Type</label>
+          <input type="text" class="roletext" name="mastertype" [(ngModel)]="mastertype">
+          <label for="choosefile">Upload</label>
+          <input type="file" class="roletext" name="choosefile" [(ngModel)]="upload.choosefile"><br>
+          <div>
+          
+         
+          <button class="btn btn-success" (click)="submit()">Submit</button>
+        
+          <br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

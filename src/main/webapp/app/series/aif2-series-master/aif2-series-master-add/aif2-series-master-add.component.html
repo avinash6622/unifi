@@ -1,0 +1,27 @@
+<div class="modal-body">
+    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="cancel()"><span
+            aria-hidden="true">x</span>
+    </button>
+    <div class="row justify-content-center">
+        <header class="mb-4">
+            <h4 class="h4 g-color-black g-font-weight-300 g-mt-15" style="margin-left: 60px;">Add AIF2 and AIF Blend Series Master</h4>
+        </header>
+        <div class="col-md-10 offset-md-1">
+            <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="classType" id="classType" placeholder="Class Type"
+                        [(ngModel)]="aif.classType">
+                </div>
+                <div class="form-group">
+                    <select class="form-control"  name="product" [(ngModel)]="aif.product.id">
+                        <option [ngValue]="null">Select Product</option>
+                        <option *ngFor="let product of products" [ngValue]="product.id">{{product.productName}}</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success">ADD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

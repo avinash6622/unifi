@@ -1,0 +1,173 @@
+<div class="container g-mt-25">
+    <div class="row">
+        <div class="col-md-4 boxsize" routerLink="/Clientmaster" routerLinkActive="active">
+            <label for="tab1">Client Master CD</label>
+        </div>
+        <div class="col-md-4 boxsize" routerLink="/pmsclients" routerLinkActive="active">
+            <label for="tab2">PMS Client</label>
+        </div>
+        <div class="col-md-4 boxsize" routerLink="/aifclients" routerLinkActive="active">
+            <label for="tab3">AIF Client</label>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="g-mt-25">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <ng-multiselect-dropdown [placeholder]="'ClientCode'" [data]="allClients" [(ngModel)]="ClientCode" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onDeSelect)="onDeSelect($event)" name="clientCode">
+                    </ng-multiselect-dropdown> -->
+                    <ng-select [items]="allClients" bindLabel="clientCode" bindValue="id" [multiple]="true" placeholder="Client Code" [(ngModel)]="ClientCode" [virtualScroll]="true" (add)="onItemSelect($event)" (remove)="onDeSelect($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <ng-multiselect-dropdown [placeholder]="'ClientName'" [data]="allClients" [(ngModel)]="ClientName" [settings]="dropdownSettings1" (onSelect)="onItemSelect1($event)" (onDeSelect)="onDeSelect1($event)" name="clientName">
+                    </ng-multiselect-dropdown> -->
+                    <ng-select [items]="allClients" bindLabel="clientName" bindValue="id" [multiple]="true" placeholder="Client Name " [(ngModel)]="ClientName" [virtualScroll]="true" (add)="onItemSelect1($event)" (remove)="onDeSelect1($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <ng-multiselect-dropdown [placeholder]="'DistributorName'" [data]="allDistributors" [(ngModel)]="DistributorName" [settings]="dropdownSettings2" (onSelect)="onItemSelect2($event)" (onDeSelect)="onDeSelect2($event)" name="clientName">
+                    </ng-multiselect-dropdown> -->
+                    <ng-select [items]="allDistributors" bindLabel="distName" bindValue="id" [multiple]="true" placeholder="Distributor Name" [(ngModel)]="DistributorName" [virtualScroll]="true" (add)="onItemSelect2($event)" (remove)="onDeSelect2($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <!-- <ng-multiselect-dropdown [placeholder]="'RmName'" [data]="allRms" [(ngModel)]="RmName" [settings]="dropdownSettings3" (onSelect)="onItemSelect3($event)" (onDeSelect)="onDeSelect3($event)" name="rmName">
+                    </ng-multiselect-dropdown> -->
+                    <ng-select [items]="allRms" bindLabel="rmName" bindValue="id" [multiple]="true" placeholder="RM Name " [(ngModel)]="RmName" [virtualScroll]="true" (add)="onItemSelect3($event)" (remove)="onDeSelect3($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" (click)=search()>Search</button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger" (click)=clear()>Clear</button>
+                </div>
+            </div>
+            <div class='col-md-4 offset-md-6' *ngIf="account && account.role.roleNameMasters[10].roleCreate === true">
+                <button class="btn btn-primary btn-md" style="float: right;" routerLink="/client-master-add">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    <span class="d-none d-md-inline">Add Client Master CD</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- <div style="margin-top: 30px;">
+        <p>No clients Found</p>
+    </div> -->
+    <div style="margin-top: 30px;">
+        <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+            <thead>
+                <tr style="text-align: center;">
+                    <th scope="col" *ngIf="account && account.role.roleNameMasters[10].roleEdit === true">Action</th>
+                    <th scope="col" [class.active]="order === 'clientCode'" (click)="setOrder('clientCode')">Client Code
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" [class.active]="order === 'clientName'" (click)="setOrder('clientName')">Client Name
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col">Pan No</th>
+                    <th scope="col" [class.active]="order === 'distributorMaster.distName'" (click)="setOrder('distributorMaster.distName')">Distrbutor
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" [class.active]="order === 'relationshipManager.rmName'" (click)="setOrder('relationshipManager.rmName')">RM
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" [class.active]="order === 'subRM.subName'" (click)="setOrder('subRM.subName')">Sub-RM
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" [class.active]="order === 'distributorOption.optionName'" (click)="setOrder('distributorOption.optionName')">Option
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" [class.active]="order === 'product.productName'" (click)="setOrder('product.productName')">Product
+                        <span [hidden]="reverse">▼</span>
+                        <span [hidden]="!reverse">▲</span>
+                    </th>
+                    <th scope="col" *ngIf="account && account.role.roleNameMasters[10].roleDelete === true">Delete</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataSearch === true">
+                <!-- <tr *ngFor="let client of clients | paginate: { id: 'clientmaster-paginator',itemsPerPage: 10, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;"> -->
+                <tr *ngFor="let client of allDatas" style="text-align: center;">
+                    <td>
+                        <a [routerLink]="['/client-master/' + client?.id + '/edit']" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit">
+                            <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                        </a>
+                    </td>
+                    <td>{{client.clientCode}}</td>
+                    <td>{{client.clientName}}</td>
+                    <td>{{client.panNo}}</td>
+                    <td><span *ngIf="client.distributorMaster !== null">{{client.distributorMaster.distName}}</span></td>
+                    <td><span *ngIf="client.relationshipManager !== null">{{client.relationshipManager.rmName}}</span></td>
+                    <td><span *ngIf="client.subRM !== null">{{client.subRM.subName}}</span></td>
+                    <td><span *ngIf="client.distributorOption !== null">{{client.distributorOption.optionName}}</span></td>
+                    <td><span *ngIf="client.product !== null">{{client.product.productName}}</span></td>
+                    <td>
+                        <a (click)="deleteClientMaster(client)" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete">
+                            <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataSearch === false">
+                <!-- <tr *ngFor="let client of clients | paginate: { id: 'clientmaster-paginator',itemsPerPage: 10, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;"> -->
+                <tr *ngFor="let client of clients | paginate: { id: 'clientmaster-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                    <td *ngIf="account && account.role.roleNameMasters[10].roleEdit === true">
+                        <a [routerLink]="['/client-master/' + client?.id + '/edit']" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit">
+                            <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                        </a>
+                    </td>
+                    <td>{{client.clientCode}}</td>
+                    <td>{{client.clientName}}</td>
+                    <td>{{client.panNo}}</td>
+                    <td><span *ngIf="client.distributorMaster !== null">{{client.distributorMaster.distName}}</span></td>
+                    <td><span *ngIf="client.relationshipManager !== null">{{client.relationshipManager.rmName}}</span></td>
+                    <td><span *ngIf="client.subRM !== null">{{client.subRM.subName}}</span></td>
+                    <td><span *ngIf="client.distributorOption !== null">{{client.distributorOption.optionName}}</span></td>
+                    <td><span *ngIf="client.product !== null">{{client.product.productName}}</span></td>
+                    <td *ngIf="account && account.role.roleNameMasters[10].roleDelete === true">
+                        <a (click)="deleteClientMaster(client)" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete">
+                            <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button style="font-size: 12px" *ngIf="dataSearch === false"><span>{{clients.length}} Records</span></button>
+        <p *ngIf="allDatas?.length === 0 && dataSearch === true">No Records Found</p>
+        <div class="row">
+            <div class="col-md-5">
+                <pagination-controls (pageChange)="clientmasterList($event)" id="clientmaster-paginator" *ngIf="dataSearch === false"></pagination-controls>
+            </div>
+            <div class="col-md-2" *ngIf="dataSearch === false">
+                <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="clientmasterList($event)">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25">25</option>
+                    <option [ngValue]="50">50</option>
+                    <option [ngValue]="100">100</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

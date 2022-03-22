@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+        <div class="col-6">
+            <header class="mb-4">
+                <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Add Client Master</h2>
+            </header>
+            <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="typeName" id="typeName" placeholder="Client Code"
+                        [(ngModel)]="clientMaster.clientCode">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="clientName" id="clientName" placeholder="Client Name"
+                        [(ngModel)]="clientMaster.clientName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="panNo" id="panNo" placeholder="PanNo"
+                        [(ngModel)]="clientMaster.panNo">
+                </div>
+                <div class="form-group">
+                    <select class="form-control"  name="distMaster" [(ngModel)]="clientMaster.distributorMaster">
+                        <option [ngValue]="null" selected>Select DistributorMaster</option>
+                        <option *ngFor="let distMaster of distributorMasters" [ngValue]="distMaster">{{distMaster.distName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control"  name="relationshipManager" [(ngModel)]="clientMaster.relationshipManager">
+                        <option [ngValue]="null" selected>Select RM</option>
+                        <option *ngFor="let relationshipManager of relations" [ngValue]="relationshipManager">{{relationshipManager.rmName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control"  name="subRM" [(ngModel)]="clientMaster.subRM">
+                        <option [ngValue]="null" selected>Select subRM</option>
+                        <option *ngFor="let subRM of subRMs" [ngValue]="subRM">{{subRM.subName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select class="form-control"  name="product" [(ngModel)]="clientMaster.product" (ngModelChange) = "onChange($event)">
+                        <option [ngValue]="null" selected>Select Product</option>
+                        <option *ngFor="let product of products" [ngValue]="product">{{product.productName}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                        <select class="form-control"  name="distributorOption" [(ngModel)]="clientMaster.distributorOption">
+                            <option [ngValue]="null" selected>Select DistributorOption</option>
+                            <option *ngFor="let distributorOption of distributerValue" [ngValue]="distributorOption">{{distributorOption.optionName}}</option>
+                        </select>
+                    </div>
+    
+                <button type="submit" class="btn btn-success">ADD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+    

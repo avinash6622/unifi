@@ -1,0 +1,68 @@
+<div class="container g-mt-25">
+    <div class="row">
+        <div class="col-md-3 boxsize" routerLink="/uploads" routerLinkActive="active">
+            <label for="tab4">FileUpload PMS</label>
+        </div>
+        <div class="col-md-3 boxsize" routerLink="/masteruploads" routerLinkActive="active">
+            <label for="tab1">FileUpload Master</label>
+        </div>
+        <div class="col-md-3 boxsize" routerLink="/aifuploads" routerLinkActive="active">
+            <label for="tab2">FileUpload AIF</label>
+        </div>
+        <div class="col-md-3 boxsize" routerLink="/upfrontuploads" routerLinkActive="active">
+            <label for="tab3">FileUpload UpFront</label>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[12].roleEdit === true">
+        <button class="btn btn-primary btn-md" style="float: right;
+        margin-top: 10px; margin-bottom: 15px;" routerLink="/upfrontadd">
+            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+            <span class="d-none d-md-inline">Add Upload</span>
+        </button>
+    </div>
+    <div style="margin-top: 20px;">
+        <h4>File Uploads Upfront</h4>
+    </div>
+    <div style="margin-top: 30px;">
+        <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+            <thead>
+                <tr style="text-align: center;">
+                    <th scope="col">File Type</th>
+                    <th scope="col">File Location</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let fileupload of fileuploads| paginate: { id: 'upfront-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                    <td>{{fileupload.fileName}}</td>
+                    <td>{{fileupload.stroreFileLocation}}</td>
+                    <td>
+                        <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteFileupolad(fileupload)" *ngIf="account && account.role.roleNameMasters[12].roleDelete === true">
+                            <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                        </a>
+                        <span *ngIf="(fileupload.isDeleted  === 0 && fileupload.uploadApproved === 0)">
+                            <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Approve" (click)="fileApprove(fileupload)" *ngIf="account && account.role.roleNameMasters[12].roleCreate === true">
+                                <i class="fa fa-check" aria-hidden="true"style="color: green;"></i>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-5">
+                <pagination-controls (pageChange)="UpfrontList($event)" id="upfront-paginator" *ngIf="fileuploads.length !== 0"></pagination-controls>
+            </div>
+            <div class="col-md-2">
+                <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="UpfrontList($event)">
+                    <option [ngValue]="10">10</option>
+                    <option [ngValue]="25">25</option>
+                    <option [ngValue]="50">50</option>
+                    <option [ngValue]="100">100</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Sub-RM Management</h3>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="subrmmgmt" [(ngModel)]=add value="addsubrm" (change)="addsubrm ($event)">Add
+            Sub-RM
+            <input type="radio" name="subrmmgmt" [(ngModel)]=update value="updatesubrm" (change)="updatesubrm($event)">Update
+            Sub-RM
+        </div>
+        <br>
+        <form>
+        <div class="subrmdetails" *ngIf="isAddsubrm">
+                <label for="SubRMCode">Sub RM Code</label>
+                <input type="text" [(ngModel)]="subrmmanagement.SubRMCode" name="SubRMCode"><br>
+                <label for="SubRMName">Sub RM Name</label>
+                <input type="text" [(ngModel)]="subrmmanagement.SubRMName" name="SubRMName"><br>
+                <label for="RMCode">RM code</label>
+                <input type="text" [(ngModel)]="subrmmanagement.RMCode" name="RMCode"><br>
+                <button class="btn btn-success" (click)="search()">Search</button>
+                <button class="btn btn-danger" (click)="clear()">Clear</button>
+        </div>
+        <div class="subrmdetails" *ngIf="isUpdatesubrm">
+            <label for="Sub RM Code">Sub RM Code</label>
+            <input type="text" [(ngModel)]="subrmmanagement.SubRMCode" name="SubRMCode"><br>
+            <label for="Sub RM Name">Sub RM Name</label>
+            <input type="text" [(ngModel)]="subrmmanagement.SubRMName" name="SubRMName"><br>
+            <label for="RM code">RM code</label>
+            <input type="text" [(ngModel)]="subrmmanagement.RMCode" name="RMCode"><br>
+            <button class="btn btn-success" (click)="search()">Search</button>
+            <button class="btn btn-danger" (click)="clear()">Clear</button>
+        </div>
+        </form>
+        <span>
+            <div *ngIf="isSearchFound">
+                <h3>Search Found!!!!</h3>
+            </div>
+        </span>
+        </form>
+    </div>
+</div>
+</div>
+
+<div [style.visibility]="isDisplaysubrm ? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+
+</div>

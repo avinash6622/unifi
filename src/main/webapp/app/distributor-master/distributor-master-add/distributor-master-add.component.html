@@ -1,0 +1,80 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Add Distributor Master</h2>
+        </header>
+        <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="distName" id="distName" placeholder="Distributor Name" [(ngModel)]="distributor.distName">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control" name="distModelType" [(ngModel)]="distributor.distModelType">
+                            <option value="null" selected>Select Distributor Model Type</option>
+                            <option value="Upfront">Upfront</option>
+                            <option value="Trail">Trail</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">-->
+                <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover" name="aifCommission" id="aifCommission" placeholder="AIF Commission" [(ngModel)]="distributor.aifCommission">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover" name="aif2Commission" id="aif2Commission" placeholder="AIF2 Commission" [(ngModel)]="distributor.aif2Commission">-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="row">
+                <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover" name="aifBlendComm" id="aifBlendComm" placeholder="Aif Blend Commission" [(ngModel)]="distributor.aifBlendComm">-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="col-md-6">-->
+                    <!--<div class="form-group">-->
+                        <!--<select class="form-control" name="distModelType" [(ngModel)]="distributor.distModelType">-->
+                            <!--<option value="null">Select Distributor Model Type</option>-->
+                            <!--<option value="Upfront">Upfront</option>-->
+                            <!--<option value="Trail">Trail</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control" name="distributorType" [(ngModel)]="distributor.distributorType">
+                            <option [ngValue]="null" selected>Select Distributor Type</option>
+                            <option *ngFor="let distributorType of distributorTypes" [ngValue]="distributorType">{{distributorType.distTypeName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control" name="relationshipManager" [(ngModel)]="distributor.relationshipManager">
+                            <option [ngValue]="null" selected>Select RM</option>
+                            <option *ngFor="let relationshipManager of relations" [ngValue]="relationshipManager">{{relationshipManager.rmName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="distributorType" [(ngModel)]="distributor.location">
+                    <option [ngValue]="null" selected>Select Location</option>
+                    <option *ngFor="let location of locations" [ngValue]="location">{{location.locationName}}</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-success">ADD</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

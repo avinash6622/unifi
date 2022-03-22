@@ -1,0 +1,32 @@
+<div class="row justify-content-center">
+    <div class="col-6 offset-1">
+        <header class="mb-4">
+            <h4 class="h4 g-color-black g-font-weight-300 g-mt-15" style="margin-left: 60px;">Subscription and Redemption Fileupload</h4>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #uploadAdd="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <select class="form-control g-brd-primary--hover" [(ngModel)]="upload.fileName" id="fileName" name="fileName" pattern="[0-9A-Za-z ]*" required>
+                        <option value="Subscription">Subscription</option>
+                        <option value="Redemption">Redemption</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <input type="file" name="fileUpload" (change)="fileChange($event)" id="fileUpload" fileUpload="ngModel" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" placeholder="Date" #datePicker class="form-control" bsDatepicker name="redemptionDate" id="redemptionDate" [(ngModel)]="upload.redemptionDate" (input)="onDateChange($event)" [bsConfig]="{dateInputFormat: 'DD-MMM-YYYY'}">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success" [disabled]="!uploadAdd.form.valid">ADD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

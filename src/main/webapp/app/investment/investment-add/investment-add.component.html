@@ -1,0 +1,21 @@
+<div class="modal-body">
+    <button aria-label="Close" data-dismiss="modal" class="close" type="button" (click)="cancel()"><span
+            aria-hidden="true">x</span>
+    </button>
+    <div class="row justify-content-center">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Add Investment</h2>
+        </header>
+        <div class="col-md-10 offset-md-1">
+            <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover"
+                        name="investmentName" id="investmentName" placeholder="Investment Name"
+                        [(ngModel)]="investment.investmentName">
+                </div>
+                <button type="submit" class="btn btn-success">ADD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

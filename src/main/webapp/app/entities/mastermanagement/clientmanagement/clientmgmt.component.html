@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+        <jhi-alert></jhi-alert>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Client Management</h3>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="clientmgmt" [(ngModel)]="add" value="addclient" (change)="addclient($event)">Add
+            Client
+            <input type="radio" name="clientmgmt" [(ngModel)]="update" value="updateclient" (change)="updateclient($event)">Update
+            Client
+        </div>
+        <br>
+        <br>
+        <form>
+        <div class="clientdetails" *ngIf="isAddclient">
+                <label for="clientcode">Client Code</label><br>
+                <input type="text" [(ngModel)]="client.clientcode" name="clientcode" required><br>
+                <label for="clientname">Client Name</label><br>
+                <input type="text" [(ngModel)]="client.clientname" name="clientname" required><br>
+                <label for="strategy"> Strategy</label><br>
+                <input type="text" [(ngModel)]="client.strategy" name="strategy"><br>
+                <label for="rm"> RM</label><br>
+                <input type="text" [(ngModel)]="client.rm" name="rm"><br>
+                <label for="distributor">Distributor</label><br>
+                <input type="text" [(ngModel)]="client.distributor" name="distributor"><br><br>
+                <button class="btn btn-success" (click)="save(isEdit)">Save</button>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+        </div>
+        <div class="clientdetails" *ngIf="isUpdateclient">
+            <label for="clientcode">Client Code</label><br>
+            <input type="text" [(ngModel)]="client.clientcode" name="clientcode" required><br>
+            <label for="clientname">Client Name</label><br>
+            <input type="text" [(ngModel)]="client.clientname" name="clientname" required><br>
+            <label for="strategy"> Strategy</label><br>
+            <input type="text" [(ngModel)]="client.strategy" name="strategy"><br>
+            <label for="rm"> RM</label><br>
+            <input type="text" [(ngModel)]="client.rm" name="rm"><br>
+            <label for="distributor">Distributor</label><br>
+            <input type="text" [(ngModel)]="client.distributor" name="distributor"><br><br>
+            <button class="btn btn-primary btn-sm" (click)="search()">Search</button>
+            <button class="btn btn-info btn-sm" (click)="clear()">Clear</button>
+            <button class="btn btn-success btn-sm" (click)="save(isEdit)">Update</button>
+        </div>
+        <br>
+        <span *ngIf="showSaveAlerts" class="alert alert-success">
+            <strong>Success!</strong> Client details are saved successfully.
+        </span>
+        <span *ngIf="dontShowAlerts" class="alert alert-danger">
+            <strong>Failed!</strong> Please enter valid client details.
+        </span>
+        <span *ngIf="showUpdateAlerts" class="alert alert-danger">
+            <strong>Updated!</strong> Client details have been updated successfully.
+        </span>
+        <br><br>
+        <span *ngIf="fetchData">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>CLIENT CODE</th>
+                    <th>CLINET NAME</th>
+                    <th>STRATEGY</th>
+                    <th>RM</th>
+                    <th>DISTRIBUTOR</th>
+                    <th>ACTION</th>
+                </tr>
+                <tr *ngFor="let client of clientmanagement">
+                    <td><a (click)="edit(client)">{{ client.id }}</a></td>
+                    <td>{{ client.clientcode }}</td>
+                    <td>{{ client.clientname }}</td>
+                    <td>{{ client.strategy }}</td>
+                    <td>{{ client.rm }}</td>
+                    <td>{{ client.distributor }}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" (click)="edit(client)">Edit</button>
+                        <button class="btn btn-danger btn-sm" (click)="delete(id)">Delete</button>
+                    </td>
+                </tr>
+            </table>
+        </span>
+        <br><br>
+        </form>
+        </span>
+        
+    </div>
+    
+</div>
+<span>
+    <div *ngIf="isSearchFound">
+        <h3>Search Found!!!!</h3>
+    </div>
+</span>
+</form>
+</div>
+</div>
+</div>
+
+<div [style.visibility]="isDisplayclient ? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+</div>

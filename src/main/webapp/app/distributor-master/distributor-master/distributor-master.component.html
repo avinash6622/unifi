@@ -1,0 +1,145 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[0].roleCreate === true">
+    <button class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;" routerLink="/distributor-master-add">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add Distributor</span>
+    </button>
+</div>
+
+<div style="margin-top: 20px;">
+    <h4>Distributor Master Details</h4>
+</div>
+<div class="container">
+    <div class="g-mt-20">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <ng-select [items]="allTypes" bindLabel="distTypeName" bindValue="id" [multiple]="true" placeholder="Distributor Type" [(ngModel)]="distType" [virtualScroll]="true" (add)="onItemSelect($event)" (remove)="onDeSelect($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <ng-select [items]="options" bindLabel="optionName" bindValue="id" [multiple]="true" placeholder="Distributor Model" [(ngModel)]="distModelType" [virtualScroll]="true" (add)="onItemSelect1($event)" (remove)="onDeSelect1($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <ng-select [items]="allDistributors" bindLabel="distName" bindValue="id" [multiple]="true" placeholder="Distributor Name" [(ngModel)]="clientName" [virtualScroll]="true" (add)="onItemSelect2($event)" (remove)="onDeSelect2($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <ng-select [items]="allRms" bindLabel="rmName" bindValue="id" [multiple]="true" placeholder="RM Name " [(ngModel)]="RmName" [virtualScroll]="true" (add)="onItemSelect3($event)" (remove)="onDeSelect3($event)" [clearable]="false">
+                    </ng-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" (click)=search()>Search</button>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger" (click)=clear()>Clear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[0].roleEdit === true">Action</th>
+                <th scope="col" [class.active]="order === 'distName'" (click)="setOrder('distName')">Distributor Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <!--<th scope="col">PMSCommission</th>-->
+                <!--<th scope="col">AifCommission</th>-->
+                <!--<th scope="col">Aif Blend Commission</th>-->
+                <!--<th scope="col">AIF2 Commission</th>-->
+                <th scope="col" [class.active]="order === 'distModelType'" (click)="setOrder('distModelType')">Distributor Model Type
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'relationshipManager.rmName'" (click)="setOrder('relationshipManager.rmName')">RelationshipManager
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'location.locationName'" (click)="setOrder('location.locationName')">Location
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col">Distributor Type</th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[0].roleDelete === true">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="dataSearch === false">
+            <tr *ngFor="let distributor of distributors | paginate: { id: 'distributor-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td *ngIf="account && account.role.roleNameMasters[0].roleEdit === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" [routerLink]="['/distributor-master/' + distributor?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                    </a>
+                </td>
+                <td>{{ distributor.distName }}</td>
+                <!--<td>{{ distributor.pmsCommission }}</td>-->
+                <!--<td>{{ distributor.aifCommission }}</td>-->
+                <!--<td>{{ distributor.aifBlendComm }}</td>-->
+                <!--<td> <span *ngIf="distributor.aif2Commission !== null">{{distributor.aif2Commission}}</span></td>-->
+                <td>{{ distributor.distModelType }}</td>
+                <td> <span *ngIf="distributor.relationshipManager !== null">{{distributor.relationshipManager.rmName}}</span></td>
+                <td><span *ngIf="distributor.location !== null">{{ distributor.location.locationName }}</span></td>
+                <td><span *ngIf="distributor.distributorType !== null">{{ distributor.distributorType.distTypeName }}</span></td>
+                <td data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" *ngIf="account && account.role.roleNameMasters[0].roleDelete === true">
+                    <a (click)="deleteDistributorMaster(distributor)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="dataSearch === true">
+            <tr *ngFor="let distributor of allDatas" style="text-align: center;">
+                <td *ngIf="account && account.role.roleNameMasters[0].roleEdit === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" [routerLink]="['/distributor-master/' + distributor?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;"></i>
+                    </a>
+                </td>
+                <td>{{ distributor.distName }}</td>
+                <!--<td>{{ distributor.pmsCommission }}</td>-->
+                <!--<td>{{ distributor.aifCommission }}</td>-->
+                <!--<td>{{ distributor.aifBlendComm }}</td>-->
+                <!--<td> <span *ngIf="distributor.aif2Commission !== null">{{distributor.aif2Commission}}</span></td>-->
+                <td>{{ distributor.distModelType }}</td>
+                <td> <span *ngIf="distributor.relationshipManager !== null">{{distributor.relationshipManager.rmName}}</span></td>
+                <td><span *ngIf="distributor.location !== null">{{ distributor.location.locationName }}</span></td>
+                <td><span *ngIf="distributor.distributorType !== null">{{ distributor.distributorType.distTypeName }}</span></td>
+                <td *ngIf="account && account.role.roleNameMasters[0].roleDelete === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteDistributorMaster(distributor)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button style="font-size: 12px" *ngIf="distributors?.length !== 0 && dataSearch === false"><span>{{distributors.length}} Records</span></button>
+    <p *ngIf="allDatas?.length === 0 && dataSearch === true">No Records Found</p>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="distributiorMasterList($event)" *ngIf="dataSearch === false" id="distributor-paginator" nextLabel="Next"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="distributiorMasterList($event)" *ngIf="dataSearch === false">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

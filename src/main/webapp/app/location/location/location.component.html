@@ -1,0 +1,51 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[7].roleCreate === true">
+    <button (click)="openAddDialog()" class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add Location</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>Location Details</h4>
+</div>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" [class.active]="order === 'locationName'" (click)="setOrder('locationName')">Location Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[7].roleEdit === true ||
+                account && account.role.roleNameMasters[7].roleDelete === true">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let location of locations | paginate: { id: 'location-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td>{{location.locationName}}</td>
+                <td *ngIf="account && account.role.roleNameMasters[7].roleEdit === true ||
+                account && account.role.roleNameMasters[7].roleDelete === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" (click)="openUpdateialog(location.id)" queryParamsHandling="merge" *ngIf="account && account.role.roleNameMasters[7].roleEdit === true">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deleteLocation(location)" *ngIf="account && account.role.roleNameMasters[7].roleDelete === true">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="locationList($event)" id="location-paginator" *ngIf="locations.length !== 0"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="locationList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

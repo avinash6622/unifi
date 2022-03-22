@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+    <div class="col-6 offset-1">
+        <header class="mb-4">
+            <h4 class="h4 g-color-black g-font-weight-300 g-mt-15" style="margin-left: 60px;">Add Master Uploads</h4>
+        </header>
+        <ngx-busy [busy]="thingsSubscription"></ngx-busy>
+        <form #uploadAdd="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="col-md-10">
+                <div class="form-group">
+                    <select class="form-control g-brd-primary--hover" [(ngModel)]="upload.distName" id="distName" name="distName" pattern="[0-9A-Za-z ]*" required>
+                        <option value="Client Master">Client Master</option>
+                        <option value="Distributor Master">Distributor Master</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="form-group">
+                    <input type="file" name="fileUpload" (change)="fileChange($event)" id="fileUpload" fileUpload="ngModel" required>
+                </div>
+                <button type="submit" class="btn btn-success" [disabled]="!uploadAdd.form.valid">ADD</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                <a href="api/download-error-pmsupload" *ngIf="upload.distName === 'Client Master' && errorStatus === true"><button type="button" class="btn btn-primary">Download</button></a>
+                <!-- <a href="api/download-bulk-client" *ngIf="upload.distName === 'Distributor Master' && errorStatus === true"><button type="button" class="btn btn-primary">Download</button></a> -->
+            </div>
+        </form>
+    </div>
+</div>

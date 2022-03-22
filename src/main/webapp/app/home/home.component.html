@@ -1,0 +1,58 @@
+<section class="container g-mt-40" *ngIf="!isAuthenticated()">
+    <div class="g-mb-30">
+        <h4 style="text-align: center; font-size: 30px"><strong>Distributor Commission Calculation System</strong></h4>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-10 col-lg-4">
+            <div class="g-brd-around g-brd-gray-light-v3 g-bg-white rounded g-px-30 g-py-20 mb-4" style="background-color: #F5F5F5 !important;">
+                <div class="col-md-8">
+                    <div class="alert alert-danger" *ngIf="authenticationError">
+                        <strong>Failed to sign in!</strong> Please check your credentials and try again.
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form class="g-py-2 form-group" (ngSubmit)="login()">
+                    <div class="mb-4 form-group">
+                        <!-- <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">USERNAME</label> -->
+                        <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15" name="username" id="username" placeholder="Username" [(ngModel)]="username" style="height: 35px;">
+                    </div>
+
+                    <div class="g-mb-5 form-group">
+                        <div class="row justify-content-between">
+                            <!-- <div class="col align-self-center">
+                                <label class="g-color-gray-dark-v2 g-font-weight-600 g-font-size-13">PASSWORD</label>
+                            </div> -->
+                            <!-- <div class="col align-self-center text-right">
+                                <a class="d-inline-block g-font-size-12 mb-2" href="#!">Forgot password?</a>
+                            </div> -->
+                        </div>
+                        <input class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover rounded g-py-15 g-px-15 mb-3" type="password" name="password" id="password" placeholder="Password" [(ngModel)]="password" style="height: 35px;">
+                        <div class="row justify-content-between">
+                            <!-- <div class="col-8 align-self-center"> -->
+                            <!-- <div class="form-check"> -->
+                            <!-- <label class="form-check-label" for="rememberMe">
+                                        <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe" [(ngModel)]="rememberMe"
+                                            checked>
+                                        <span>Remember me</span>
+                                    </label> -->
+                            <!-- <button type="submit" class="btn btn-success">Sign in</button><br>
+                                    <a class="alert-link" (click)="requestResetPassword()">Forgot password?</a> -->
+                            <!-- </div> -->
+                            <!-- </div> -->
+                            <div class="col-8 align-self-center g-mt-10">
+                                <button class="btn btn-md u-btn-primary rounded" type="submit">
+                                    Login
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- End Form -->
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container g-mt-50 text-center" *ngIf="isAuthenticated()">
+    <h3>Welcome to Distributor Commission Calculation System</h3>
+</section>

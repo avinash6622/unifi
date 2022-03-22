@@ -1,0 +1,123 @@
+<div style="margin-top: 20px;">
+    <h4>Client Fee Commission Details</h4>
+</div>
+<div class="g-mt-20">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                <ng-select [items]="pmsClients" bindLabel="clientCode" bindValue="id" [multiple]="true" placeholder="Client Code" [(ngModel)]="ClientCode" [virtualScroll]="true" (add)="onItemSelect($event)" (remove)="onDeSelect($event)" [clearable]="false">
+                </ng-select>
+            </div>
+        </div>
+        <!-- <div class="col-md-3">
+            <div class="form-group">
+                <ng-select [items]="pmsClients" bindLabel="clientName" bindValue="id" [multiple]="true" placeholder="Client Name" [(ngModel)]="ClientName" [virtualScroll]="true" (add)="onItemSelect1($event)" (remove)="onDeSelect1($event)" [clearable]="false">
+                </ng-select>
+            </div>
+        </div> -->
+        <div class="col-md-3">
+            <div class="form-group">
+                <ng-select [items]="allDistributors" bindLabel="distName" bindValue="id" [multiple]="true" placeholder="Distributor Name" [(ngModel)]="DistributorName" [virtualScroll]="true" (add)="onItemSelect2($event)" (remove)="onDeSelect2($event)" [clearable]="false">
+                </ng-select>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <button type="button" class="btn btn-success" (click)=search()>Search</button>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <button type="button" class="btn btn-danger" (click)=clear()>Clear</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col">Action</th>
+                <th scope="col" [class.active]="order === 'pmsClientMaster.clientCode'" (click)="setOrder('pmsClientMaster.clientCode')">PMS Client Code
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'pmsClientMaster.clientName'" (click)="setOrder('pmsClientMaster.clientName')">PMS Client Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" [class.active]="order === 'pmsClientMaster.distributorMaster.distName'" (click)="setOrder('pmsClientMaster.distributorMaster.distName')">Distributor Master
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col">Brokerage Commission</th>
+                <th scope="col">Profit Commission</th>
+                <th scope="col">Nav Commission</th>
+            <!--    <th scope="col">AIF Commission</th>
+                <th scope="col">Commission CD</th>-->
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="dataSearch === false">
+            <tr *ngFor="let clientfees of clientfees| paginate: { id: 'clientfee-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td>
+                    <a [routerLink]="['/client-fee/' + clientfees?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit"></i>
+                    </a>
+                </td>
+                <td>{{clientfees.pmsClientMaster.clientCode}}</td>
+                <td>{{clientfees.pmsClientMaster.clientName}}</td>
+                <td><span *ngIf="clientfees.pmsClientMaster.distributorMaster !== null">{{clientfees.pmsClientMaster.distributorMaster.distName}}</span>
+                    <span *ngIf="clientfees.pmsClientMaster.distributorMaster === null"></span></td>
+                <td>{{clientfees.brokerageComm}}</td>
+                <td>{{clientfees.profitComm}}</td>
+                <td>{{clientfees.navComm}}</td>
+              <!--  <td>{{clientfees.aifComm}}</td>
+                <td>{{clientfees.corpusComm}}</td>-->
+
+                <td>
+                    <a (click)="deleteClientFeeCommisson(clientfees)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="dataSearch === true">
+            <tr *ngFor="let clientfees of allDatas | paginate: { id: 'clientfee-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td>
+                    <a [routerLink]="['/client-fee/' + clientfees?.id + '/edit']">
+                        <i class="fa fa-pencil-square" aria-hidden="true" style="color: blue;" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit"></i>
+                    </a>
+                </td>
+                <td>{{clientfees.pmsClientMaster.clientCode}}</td>
+                <td>{{clientfees.pmsClientMaster.clientName}}</td>
+                <td>{{clientfees.pmsClientMaster.distributorMaster.distName}}</td>
+                <td>{{clientfees.brokerageComm}}</td>
+                <td>{{clientfees.profitComm}}</td>
+                <td>{{clientfees.navComm}}</td>
+                <td>{{clientfees.aifComm}}</td>
+                <td>{{clientfees.corpusComm}}</td>
+
+                <td>
+                    <a (click)="deleteClientFeeCommisson(clientfees)">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;" data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="allDatas?.length === 0 && dataSearch === true">No Records Found</p>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="clientfeeCommissionList($event)" id="clientfee-paginator" *ngIf="clientfees?.length !== 0 && dataSearch === false"></pagination-controls>
+        </div>
+        <div class="col-md-2" *ngIf="clientfees?.length !== 0 && dataSearch === false">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="clientfeeCommissionList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

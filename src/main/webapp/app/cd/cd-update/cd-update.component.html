@@ -1,0 +1,233 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 60px;">Update Commission Definition</h2>
+        </header>
+        <form #addfinishedstockform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="commissionName" id="commissionName" placeholder="Commission Name" [(ngModel)]="comdef.commissionName">
+            </div>
+            <!-- <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="commissionCode" id="commissionCode" placeholder="Commission Code" [(ngModel)]="comdef.commissionCode">
+            </div> -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group" *ngIf="comdef && comdef.product.id">
+                        <label>Product</label>
+                        <select class="form-control" name="product" [(ngModel)]="comdef.product.id" (ngModelChange)="onChange($event)">
+                            <option [ngValue]="null" selected>Select Product</option>
+                            <option *ngFor="let product of products" [ngValue]="product.id">{{product.productName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group" *ngIf="comdef && comdef.location">
+                        <label>Location</label>
+                        <select class="form-control" name="location" [(ngModel)]="comdef.location.id">
+                            <option [ngValue]="null" selected>Select Location</option>
+                            <option *ngFor="let location of locations" [ngValue]="location.id">{{location.locationName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="comdef.product?.productName === 'BCAD'">
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="bcadPMS"
+                                [value]="0"
+                                [(ngModel)]="comdef.bcadPMS" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                            options
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="bcadPMS"
+                                [value]="1"
+                                [(ngModel)]="comdef.bcadPMS" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                            option 3
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="comdef.product?.productName === 'BCAD'">
+
+                    <div class="col-md-3">
+                        <div class="form-check-inline">
+                            <label class="form-check">
+                                <input class="form-check-input mr-1" type="radio" name="pmsInvest"
+                                       [value]="0"
+                                       [(ngModel)]="comdef.pmsInvest" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                                Before Mar 2020
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check-inline">
+                            <label class="form-check">
+                                <input class="form-check-input mr-1" type="radio" name="pmsInvest"
+                                       [value]="1"
+                                       [(ngModel)]="comdef.pmsInvest" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()" >
+                                After Mar 2020
+                            </label>
+                        </div>
+                    </div>
+
+            </div>
+            <div class="row" *ngIf="(!(comdef.product?.productName === 'AIF' || comdef.product?.productName === 'AIF Blend'
+             || comdef.product?.productName === 'AIF2' || comdef.product?.productName === 'BCAD' || comdef.product?.productName === 'UNIFI AIF Umbrella Blend Fund - 2')) && comdef.product!=null">
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="pmsInvest"
+                                   [value]="0"
+                                   [(ngModel)]="comdef.pmsInvest" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()">
+                            Before Mar 2020
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check-inline">
+                        <label class="form-check">
+                            <input class="form-check-input mr-1" type="radio" name="pmsInvest"
+                                   [value]="1"
+                                   [(ngModel)]="comdef.pmsInvest" [ngModelOptions]="{standalone: true}" (change)="onRadioButton()" >
+                            After Mar 2020
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" *ngIf="comdef.bcadPMS !== 1">
+                <label>Distributor</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="comdef.distributorMasters" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="distributorMaster">
+                </ng-multiselect-dropdown>
+            </div>
+            <div class="form-group" *ngIf="comdef.product?.productName === 'BCAD' && comdef.bcadPMS === 1">
+                <label>Distributor</label>
+                <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="comdef.distributorMasterOption" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" [multiple]="true"
+                    name="distributorMaster">
+                </ng-multiselect-dropdown>
+            </div>
+            <div *ngIf="comdef.product?.productName === 'BCAD' && comdef.bcadPMS === 0">
+                <div *ngFor="let distributorOption of distributerValue; let i = index">
+                    <label *ngIf="i === 0">Fee</label><br>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>{{distributorOption.distributorOption.optionName}}</p>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-check-inline" *ngFor="let opt of enum_details; let ind = index">
+                                <label class="form-check">
+                                    <input class="form-check-input mr-1" type="radio" name="feeType-{{i}}-{{ind}}"
+                                        [value]="opt.name"
+                                        [(ngModel)]="comdef.commissionDefinitionOptionMaps[i].feeCalculation" [ngModelOptions]="{standalone: true}">
+                                    {{opt.name}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+           <!-- <div *ngIf="(comdef.product?.productName === 'BCAD' && comdef.bcadPMS === 0)">
+                <div>
+                    <label>Distributor Commission</label><br>
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover" name="distributorComm" id="distributorComm" placeholder="Distributor Commission" [(ngModel)]="comdef.distributorComm">
+                </div>
+            </div>-->
+            <div *ngIf="(comdef.product?.productName === 'AIF' || comdef.product?.productName === 'AIF2' || comdef.product?.productName === 'AIF Blend' || comdef.product?.productName === 'UNIFI AIF Umbrella Blend Fund - 2')">
+                <div>
+                    <label>Distributor Commission</label><br>
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="distributorComm" id="distributorComm" placeholder="Distributor Commission" [(ngModel)]="comdef.distributorComm">
+                </div>
+            </div><br>
+            <div *ngIf="comdef.product?.productName === 'BCAD' && comdef.bcadPMS === 0">
+                <label>Tenor</label>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" name="tenor1" [(ngModel)]="comdef.tenorMinYr">
+                                    <option [ngValue]="null" selected>MIN</option>
+                                    <option [ngValue]="1">1</option>
+                                    <option [ngValue]="2">2</option>
+                                    <option [ngValue]="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <select class="form-control" name="tenor2" [(ngModel)]="comdef.tenorMaxYr">
+                                <option [ngValue]="null" selected>MAX</option>
+                                <option [ngValue]="1">1</option>
+                                <option [ngValue]="2">2</option>
+                                <option [ngValue]="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!(comdef.product?.productName === 'AIF' || comdef.product?.productName === 'AIF Blend'
+             || comdef.product?.productName === 'AIF2' || comdef.product?.productName === 'UNIFI AIF Umbrella Blend Fund - 2')">
+               <!-- <div>
+                    <label>Brokerage Commission</label>
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white&#45;&#45;focus g-brd-gray-light-v4 g-brd-primary&#45;&#45;hover" name="brokerageComm" id="brokerageComm" placeholder="Brokerage Commission" [(ngModel)]="comdef.brokerageComm">
+                </div>
+                <br>-->
+                <div>
+                    <label>Nav Commission</label>
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="navComm" id="navComm" placeholder="Nav Commission" [(ngModel)]="comdef.navComm">
+                </div><br>
+                <div>
+                    <label>Profit Commission</label>
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="profitComm" id="profitComm" placeholder="Profit Comm" [(ngModel)]="comdef.profitComm">
+                </div><br>
+            </div>
+            <div *ngIf="comdef.product?.productName === 'BCAD' && comdef.bcadPMS === 0">
+                    <div *ngIf="kotakShow === 1">
+                            <label>Upfront Fee Date</label>
+                            <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <!-- <label>Old account Upfront Start Date {{comdef.startYear}}</label> -->
+                                    <input type="text" placeholder="StartDate" class="form-control" bsDatepicker name="startYear" id="startYear" [(ngModel)]="comdef.startYear" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange($event)">
+                           </div></div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                            <!-- <label>New account Upfront Start Date {{comdef.endYear}}</label> -->
+                                    <input type="text" placeholder="EndDate" class="form-control" bsDatepicker name="endYear" id="endYear" [(ngModel)]="comdef.endYear" [bsConfig]="{dateInputFormat: 'DD-MM-YYYY'}" (input)="onDateChange1($event)">
+                            </div></div></div>
+                            </div>
+                <label>Payment Adjustment</label><br>
+                <div>
+                    <!-- <label>UpFront Per</label> -->
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="upfrontper" id="upfrontper" placeholder="UpFront Per" [(ngModel)]="comdef.upfrontper">
+                </div>
+                <br>
+                <div  *ngIf="kotakShow === 1">
+                        <!-- <label> Second UpFront Per</label> -->
+                        <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="secUpfrontper" id="secUpfrontper" placeholder="Second UpFront Per (%)" [(ngModel)]="comdef.secUpfrontper">
+                   <br> </div>
+                <div>
+                    <!-- <label>Trail</label> -->
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="trialper" id="trialper" placeholder="Trail" [(ngModel)]="comdef.trialper">
+                </div><br>
+                <div>
+                    <!-- <label>Adjustments in %</label> -->
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="adjustmentper" id="adjustmentper" placeholder="Adjustments in %" [(ngModel)]="comdef.adjustmentper">
+                </div><br>
+                <div>
+                    <!-- <label>Adjustments Yrs</label> -->
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="adjustmentyr" id="adjustmentyr" placeholder="Adjustments Yrs" [(ngModel)]="comdef.adjustmentyr">
+                </div><br>
+                <div  *ngIf="kotakShow === 1">
+                    <!-- <label> Second Adjustment Per</label> -->
+                    <input type="text" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="secAdjustmentper" id="secAdjustmentper" placeholder="Second Adjustment Years" [(ngModel)]="comdef.secAdjustmentYr">
+                    <br> </div>
+            </div><br>
+            <button type="submit" class="btn btn-success">Update</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>

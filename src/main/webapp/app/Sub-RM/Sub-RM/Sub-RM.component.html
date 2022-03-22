@@ -1,0 +1,58 @@
+<div style="margin-top: 20px;" *ngIf="account && account.role.roleNameMasters[3].roleCreate === true">
+    <button (click)="openAddDialog()" class="btn btn-primary btn-md" style="float: right;
+    margin-top: 10px; margin-bottom: 15px;">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add Sub-RM</span>
+    </button>
+</div>
+<div style="margin-top: 20px;">
+    <h4>Sub-RM Details</h4>
+</div>
+<form #SubRmFilterForm="ngForm" name="form" role="form">
+    <div class="row">
+        <div class="col-3">
+            <input [(ngModel)]="subRm.subName" name="subName" [typeahead]="findScreenData" typeaheadOptionField="subName" placeholder="Filter By Sub Name" class="form-control" required (ngModelChange)="getSubRmDetailsBySearch()">
+        </div>
+    </div>
+</form>
+<div style="margin-top: 30px;">
+    <table class="table table-bordered col-md-12" style="margin-top: 30px;">
+        <thead>
+            <tr style="text-align: center;">
+                <th scope="col" [class.active]="order === 'subName'" (click)="setOrder('subName')">Sub-RM Name
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col" *ngIf="account && account.role.roleNameMasters[3].roleEdit === true ||
+                account && account.role.roleNameMasters[3].roleDelete === true">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let subrm of subrms | paginate: { id: 'subrm-paginator',itemsPerPage: listItesmsPerPage, currentPage: listPage, totalItems: listTotalItems }" style="text-align: center;">
+                <td>{{subrm.subName}}</td>
+                <td *ngIf="account && account.role.roleNameMasters[3].roleEdit === true ||
+                account && account.role.roleNameMasters[3].roleDelete === true">
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Edit" (click)="openUpdateDialog(subrm.id)" queryParamsHandling="merge" *ngIf="account && account.role.roleNameMasters[3].roleEdit === true">
+                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    </a>
+                    <a data-toggle="tooltip" container="body" placement="top" ngbTooltip="Delete" (click)="deletesubrm(subrm)" *ngIf="account && account.role.roleNameMasters[3].roleDelete === true">
+                        <i class="fa fa-trash" aria-hidden="true" style="color: darkred;"></i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-md-5">
+            <pagination-controls (pageChange)="SubRMList($event)" id="subrm-paginator" *ngIf="PaginationFlag"></pagination-controls>
+        </div>
+        <div class="col-md-2">
+            <select id="PerPage" class="form-control" [(ngModel)]="listItesmsPerPage" (change)="SubRMList($event)">
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+                <option [ngValue]="100">100</option>
+            </select>
+        </div>
+    </div>
+</div>

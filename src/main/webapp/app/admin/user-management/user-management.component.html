@@ -1,0 +1,89 @@
+<div class="well" style="font-size: 13px;">
+    <button class="btn u-btn-teal btn-md g-py-7" style="float: left;
+    margin-top: 10px; margin-bottom: 5px;" [routerLink]="['./new']" *ngIf="currentAccount && currentAccount.role.roleNameMasters[17].roleCreate === true">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
+        <span class="d-none d-md-inline">Add User</span>
+    </button>
+	<jhi-alert></jhi-alert>
+	<div class="table-responsive" *ngIf="users">
+		<table class="table table-striped">
+                <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+                        
+                        <th jhiSortBy="login"><span>User Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="firstName"><span>First Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="lastName"><span>Last Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="email"><span>Email</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th>Status</th>
+                        <!--<th><span>Roles</span></th>-->
+                        <th jhiSortBy="distributorMaster"><span>Distributor</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="relationshipManager"><span>RM</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="subRM"><span>Sub-RM</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                        <th jhiSortBy="role"><span>Role</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                       
+                        <th *ngIf="currentAccount && currentAccount.role.roleNameMasters[17].roleDelete === true">Action</th>
+                    </tr>
+                </thead>
+            <tbody *ngIf="users">
+                <tr *ngFor="let user of users; trackBy: trackIdentity">
+                   
+                    <td>
+
+                    <button class="btn btn-md u-btn-teal g-px-5 g-py-3" type="button" [routerLink]="['./', user.login, 'edit']"
+                        queryParamsHandling="merge" *ngIf="currentAccount && currentAccount.role.roleNameMasters[17].roleEdit === true">
+                        <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                    </button>
+                    <a class="clr" [routerLink]="['./', user.login, 'view']">
+                        {{ user.login }}
+                    </a>
+                </td>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" (click)="setActive(user, true)" *ngIf="!user.activated">Deactivated</button>
+                    <button class="btn btn-success btn-sm" (click)="setActive(user, false)" *ngIf="user.activated"
+                    [disabled]="currentAccount.login === user.login">Activated</button>
+                </td>
+
+               <!-- <td>
+                    <div *ngFor="let authority of user.authorities">
+                        <span class="badge badge-info">{{ authority }}</span>
+                    </div>
+                </td>-->
+
+                <td>
+                    <span *ngIf="user.distributorMaster !== null">{{user.distributorMaster.distName}}</span>
+                </td>
+                <td>
+                    <span *ngIf="user.relationshipManager !== null">{{user.relationshipManager.rmName}}</span>
+                </td>
+
+                <td><span *ngIf="user.subRM !== null">{{user.subRM.subName}}</span></td>
+
+                <td><span *ngIf="user.role !== null">{{user.role.roleName}}</span></td>
+                
+            
+                <td class="text-right"  *ngIf="currentAccount && currentAccount.role.roleNameMasters[17].roleDelete === true">
+                    <div class="btn-group flex-btn-group-container">
+                       
+                        <button type="button" (click)="deleteUser(user)"
+                        button class="btn btn-md u-btn-darkred g-px-5 g-py-3" [disabled]="currentAccount.login === user.login">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                            <span class="d-none d-md-inline"></span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="users">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

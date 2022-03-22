@@ -1,0 +1,94 @@
+<div class="row">
+  <div class="col-md-3">
+    <jhi-app-usermanagement></jhi-app-usermanagement>
+  </div>
+  <div class="col-md-8">
+    <div>
+      <h3>Add Role</h3>
+    </div>
+    <form>
+      <div class="roleDetails">
+          <label for="rolecode">Role Code</label>
+          <input type="text" class="roletext" name="rolecode" [(ngModel)]="rolecode">
+          <label for="rolename">Role Name</label>
+          <input type="text" class="roletext" name="rolename" [(ngModel)]="role.roleName"><br>
+          <div>
+            <br>
+          <!-- <button class="btn btn-info">Search</button><br> -->
+          <!-- <label class="new-label">Investment Module</label>
+          <input type="checkbox" class="check-input" name="investment" value="create">Create
+          <input type="checkbox" class="check-input" name="investment" value="view">View
+          <input type="checkbox" class="check-input" name="investment" value="edit">Edit
+          <input type="checkbox" class="check-input" name="investment" value="delete">Delete<br>
+          <label class="new-label">Series Module</label>
+          <input type="checkbox" class="fcheck-input" name="series" value="create">Create
+          <input type="checkbox" class="check-input" name="series" value="view">View
+          <input type="checkbox" class="check-input" name="series" value="edit">Edit
+          <input type="checkbox" class="check-input" name="series" value="delete">Delete<br>
+          <label class="new-label">Users Module</label>
+          <input type="checkbox" class="check-input" name="usersmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="usersmodule" value="view">View
+          <input type="checkbox" class="check-input" name="usersmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="usersmodule" value="delete">Delete<br>
+          <label class="new-label">Role Module</label>
+          <input type="checkbox" class="check-input" name="rolemodule" value="create">Create
+          <input type="checkbox" class="check-input" name="rolemodule" value="view">View
+          <input type="checkbox" class="check-input" name="rolemodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="rolemodule" value="delete">Delete<br>
+          <label class="new-label">RM Module</label>
+          <input type="checkbox" class="check-input" name="rmmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="rmmodule" value="view">View
+          <input type="checkbox" class="check-input" name="rmmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="rmmodule" value="delete">Delete<br>
+          <label class="new-label">Sub-RM Module</label>
+          <input type="checkbox" class="check-input" name="subrmmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="subrmmodule" value="view">View
+          <input type="checkbox" class="check-input" name="subrmmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="subrmmodule" value="delete">Delete<br>
+          <label class="new-label">Distributor Module</label>
+          <input type="checkbox" class="check-input" name="distributormodule" value="create">Create
+          <input type="checkbox" class="check-input" name="distributormodule" value="view">View
+          <input type="checkbox" class="check-input" name="distributormodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="distributormodule" value="delete">Delete<br>
+          <label class="new-label">Client Module</label>
+          <input type="checkbox" class="check-input" name="clientmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="clientmodule" value="view">View
+          <input type="checkbox" class="check-input" name="clientmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="clientmodule" value="delete">Delete<br>
+          <label class="new-label">Option Module</label>
+          <input type="checkbox" class="check-input" name="optionmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="optionmodule" value="view">View
+          <input type="checkbox" class="check-input" name="optionmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="optionmodule" value="delete">Delete<br>
+          <label class="new-label">Location Module</label>
+          <input type="checkbox" class="check-input" name="locationmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="locationmodule" value="view">View
+          <input type="checkbox" class="check-input" name="locationmodule" value="edit">Edit
+          <input type="checkbox" class="check-input" name="locationmodule" value="delete">Delete<br>
+          <label class="new-label">Upload Module</label>
+          <input type="checkbox" class="check-input" name="uploadmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="uploadmodule" value="view">View<br>
+          <label class="new-label">Report Generation Module</label>
+          <input type="checkbox" class="check-input" name="reportgeneration" value="create">Create
+          <input type="checkbox" class="check-input" name="reportgeneration" value="view">View<br>
+          <label class="new-label">Uploaded Files Module</label>
+          <input type="checkbox" class="check-input" name="uploadedfilesmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="uploadedfilesmodule" value="view">View
+          <input type="checkbox" class="check-input" name="uploadedfilesmodule" value="approval">Approval<br>
+          <label class="new-label">Payments Module</label>
+          <input type="checkbox" class="check-input" name="paymentsmodule" value="create">Create
+          <input type="checkbox" class="check-input" name="paymentsmodule" value="view">View<br>
+          <label class="new-label">Change Password</label>
+          <input type="checkbox" class="check-input" name="changepassword" value="create">Create<br>
+          <label class="new-label">Kill Session</label>
+          <input type="checkbox" class="check-input" name="changepassword" value="create">Create<br>
+          <br>  -->
+         
+          <button class="btn btn-success" (click)="save(data)">Save</button>
+          <button class="btn btn-danger" (click)="Reset()">Reset</button>
+          <br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

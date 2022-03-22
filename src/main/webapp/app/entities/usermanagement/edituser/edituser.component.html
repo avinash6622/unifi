@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="col-md-3">
+    <jhi-app-usermanagement></jhi-app-usermanagement>
+  </div>
+  <div class="col-md-8">
+    <div>
+      <h3>Edit User</h3>
+    </div>
+    <form>
+      <div class="userDetails">
+        <label for="login">User Name</label>
+        <input type="text" name="login" [(ngModel)]="user.login" placeholder="User Name" required><br>
+        <label for="email">Email</label>
+        <input type="email" name="email" [(ngModel)]="user.email" placeholder="Email"><br>
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" [(ngModel)]="user.firstName" placeholder="First Name"><br>
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" [(ngModel)]="user.lastName" placeholder="Last Name"><br>
+        <label for="authorities">Role</label>
+        <input type="text" name="authorities" [(ngModel)]="user.authorities" placeholder="Role"><br>
+        <label for="authorities">Distributors</label>
+        <input type="text" name="distributorMaster" [(ngModel)]="user.distributorMaster.distName" placeholder="Distributors"><br>
+        <label for="authorities">RM</label>
+        <input type="text" name="relationshipManager" [(ngModel)]="user.relationshipManager.rmName" placeholder="RM"><br>
+        <label for="authorities">Sub-RM</label>
+        <input type="text" name="subRM" [(ngModel)]="user.subRM.subRMName" placeholder="Sub-RM"><br>
+        <button type="submit" class="btn btn-success btn-sm" (click)="search()">Search</button>
+        <button type="submit" class="btn btn-danger btn-sm" (click)="clear()">Clear</button>
+        <button type="submit" class="btn btn-info btn-sm" (click)="update(user)">Update</button><br>
+        <br>
+        <span>
+          <table>
+            <tr>
+              <th>USER NAME</th>
+              <th>FIRST NAME</th>
+              <th>LAST NAME</th>
+              <th>EMAIL</th>
+              <th>ROLE</th>
+              <th>DISTRIBUTOR</th>
+              <th>RM</th>
+              <th>Sub-RM</th>
+              <th>ACTION</th>
+            </tr>
+            <tr *ngFor="let user of userService">
+              <td>{{ user.login }}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{ user.lastName }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                  <option *ngFor="let role of user.authorities">{{ role }}</option>
+              </td>
+              <td>
+                <span *ngIf="user.distributorMaster !== null">{{ user.distributorMaster.distName }}</span>
+              </td>
+              <td>
+                <span *ngIf="user.relationshipManager !== null">{{ user.relationshipManager.rmName }}</span>
+              </td>
+              <td>
+                <span *ngIf="user.subRM !== null">{{ user.subRM.subRMName }}</span>
+              </td>
+              <td>
+                <button class="btn btn-primary btn-sm smlr" (click)="edit(user)">Edit</button>
+                <button class="btn btn-danger btn-sm smlr" (click)="delete(id)">Delete</button>
+              </td>
+            </tr>
+          </table>
+        </span>
+      </div>
+  </div>
+</div>

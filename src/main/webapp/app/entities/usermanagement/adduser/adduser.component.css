@@ -1,0 +1,57 @@
+.row {
+    background-color: white;
+}
+h3 {
+    background-color: rgb(8, 63, 85);
+    border-radius: 10px;
+    box-shadow: 2px 1px 10px grey;
+    width: 20%;
+    margin-top: 5px;
+    padding: 10px;
+    text-align: left !important;
+    color: white;
+    font-weight: 300;
+}
+.userDetails {
+    background-color: rgb(226, 223, 223);
+    box-shadow: 2px 1px 10px grey;
+    color: black;
+    border-radius: 5px;
+    height: 100%;
+    width: 90%;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 15px;
+    padding: 20px;
+}
+input {
+    width: 27%;
+    text-align: left;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+label {
+    margin-left: 0% !important;
+    text-align: left !important;
+}
+/* input[type='checkbox'] {
+    text-align: center;
+    margin-left: 100px;
+} */
+/* table {
+    width: 98%;
+    margin-left: 5px;
+}
+th {
+    background-color: rgb(50, 76, 87);
+    color: white;
+    border: 1px solid black;
+}
+tr,
+td {
+    border: 1px solid black;
+}
+tr:nth-of-type(odd) {
+    background-color: beige;
+} */

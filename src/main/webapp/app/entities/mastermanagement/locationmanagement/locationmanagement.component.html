@@ -1,0 +1,51 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Location Management</h3>
+        </div>
+        <div class="partition2">
+            <input type="radio" name="locationmgmt" [(ngModel)]=add value="addlocation" (change)="addlocation($event)">Add
+            Location
+            <input type="radio" name="locationmgmt" [(ngModel)]=update value="updatelocation" (change)="updatelocation($event)">Update
+            Location
+        </div>
+        <br>
+        <form>
+            <div class="locationdetails" *ngIf="isAddLocation">
+                <label for="LocationCode">Location Code</label>
+                <input type="text" [(ngModel)]="locationmanagement.LocationCode" name="LocationCode"><br>
+                <label for="LocationName">Location Name</label>
+                <input type="text" [(ngModel)]="locationmanagement.LocationName" name="LocationName"><br>
+                <br>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+                <button class="btn btn-success" (click)="save()">Save</button>
+            </div>
+            <div class="locationdetails" *ngIf="isUpdateLocation">
+                <label for="Location Code">Location Code</label>
+                <input type="text" [(ngModel)]="locationmanagement.LocationCode" name="LocationCode"><br>
+                <label for="Location Name">Location Name</label>
+                <input type="text" [(ngModel)]="locationmanagement.LocationName" name="LocationName"><br>
+                <br>
+                <button class="btn btn-danger" (click)="search()">Search</button>
+                <button class="btn btn-success" (click)="clear()">Clear</button>
+            </div>
+        </form>
+    </div>
+    <span>
+        <div *ngIf="isSearchFound">
+            <h3>Search Found!!!!</h3>
+        </div>
+    </span>
+</div>
+
+<div [style.visibility]="isDisplaylocation ? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+
+</div>

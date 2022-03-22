@@ -1,0 +1,68 @@
+.row {
+    background-color: white;
+}
+h3 {
+    background-color: rgb(7, 71, 130);
+    border-radius: 10px;
+    box-shadow: 2px 1px 10px grey;
+    width: 35%;
+    margin-top: 5px;
+    padding: 10px;
+    text-align: left !important;
+    color: white;
+    font-weight: 300;
+}
+.partition {
+    margin-right: 0px;
+}
+
+.partition1 {
+    margin-left: 50px;
+}
+.partition2 {
+    background-color: rgb(247, 244, 244);
+    border-radius: 10px;
+    width: 42%;
+    padding: 5px;
+    font-size: 18px;
+    text-align: left;
+    color: black;
+    font-weight: 400;
+}
+
+.clientdetails {
+    background-color: rgb(226, 223, 223);
+    box-shadow: 2px 1px 10px grey;
+    color: black;
+    border-radius: 5px;
+    width: 40%;
+    padding: 20px;
+    font-size: 16px;
+    font-weight: 400;
+}
+input[type='text'] {
+    width: 75%;
+    align-self: auto;
+    padding-left: 5px;
+}
+input[type='radio'] {
+    width: 40px;
+    height: 20px;
+    align-self: auto;
+}
+table {
+    width: 98%;
+    margin-left: 5px;
+}
+th {
+    background-color: rgb(50, 76, 87);
+    color: white;
+    border: 1px solid black;
+}
+tr,
+td {
+    border: 1px solid black;
+}
+tr:nth-of-type(odd) {
+    background-color: beige;
+}

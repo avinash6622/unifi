@@ -1,0 +1,16 @@
+.container {
+    height: 610px;
+    width: 800px;
+    color: white;
+    border: 5px solid black;
+    text-align: left !important;
+    box-sizing: border-box;
+    /*border: 5px solid black;*/
+    margin-top: 0px;
+    background-color: rgb(8, 63, 85);
+    padding-top: 20px;
+}
+.success-alert {
+    background-color: white;
+    color: #28a745;
+}

@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-3 partition">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Strategy Management</h3>
+        </div>
+        <div class="partition2">
+                <input type="radio" name="strategymgmt" [(ngModel)]=add value="addstrategy" (change)="addstrategy($event)">Add
+                Strategy
+                <input type="radio" name="strategymgmt" [(ngModel)]=update value="updatestrategy" (change)="updatestrategy($event)">Update
+                Strategy
+        </div>
+        <br>
+        <form>
+        <div class="clientdetails" *ngIf="isAddstrategy">
+                <form action="">
+                    <label for="StrategyCode">Strategy Code</label>
+                    <input type="text" [(ngModel)]="strategymanagement.StrategyCode" name="StrategyCode"><br>
+                    <label for="StrategyName">Strategy Name</label>
+                    <input type="text" [(ngModel)]="strategymanagement.StrategyName" name="StrategyName"><br>
+                    <br>
+                    <button class="btn btn-success" (click)="search()">Search</button>
+                    <button class="btn btn-danger" (click)="clear()">Clear</button>
+                    
+            </div>
+            <div class="clientdetails"  *ngIf="isUpdatestrategy">
+                <label for="StrategyCode">Strategy Code</label>
+                <input type="text" [(ngModel)]="strategymanagement.StrategyCode" name="StrategyCode"><br>
+                <label for="StrategyName">Strategy Name</label>
+                <input type="text" [(ngModel)]="strategymanagement.StrategyName" name="StrategyName"><br>
+                <br>
+                <button class="btn btn-success" (click)="search()">Search</button>
+                <button class="btn btn-danger" (click)="clear()">Clear</button>
+            </div>
+            </form>
+        
+        <span>
+            <div *ngIf="isSearchFound">
+                <h3>Search Found!!!!</h3>
+            </div>
+        </span>
+        </form>
+    </div>
+</div>
+
+
+<div [style.visibility]="isDisplaystrategy ? 'visible' :'hidden'">
+    <label>Client Code</label>
+    <input type="text">
+
+    <label>Client Name</label>
+    <input type="text">
+
+</div>

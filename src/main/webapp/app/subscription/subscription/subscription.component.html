@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <header class="col-md-1">
+            <h4 class="h4 g-color-black g-font-weight-200">
+                Subscription
+            </h4>
+        </header>
+        <form #subscriptionform="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" placeholder="Subscription date" class="form-control" bsDatepicker name="subscriptionDatesubscriptionDate" id="subscriptionDatesubscriptionDatesubscriptionDate" [(ngModel)]="subscription.subscriptionDate" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <ng-multiselect-dropdown [placeholder]="'Select Series'" [data]="seriesMasters" [(ngModel)]="seriesMaster" [settings]="dropdownSettings" (onSelect)="onItemSelect($event, i)" (onDeSelect)="onItemDeSelect($event)" name="seriesMaster">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" placeholder="Cost Of Unit" class="form-control" name="navAsOn" id="navAsOn" [(ngModel)]="subscription.navAsOn" [disabled]="disabledValue">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-success">Subscribe</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+                </div>
+                <div class="container-fluid">
+                    <div class="form-row">
+                        <div class="col-sm-12">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Client Code</th>
+                                        <th>Client Name</th>
+                                        <th>Distributor</th>
+                                        <th>No Of Units</th>
+                                        <th>Portfolio Value</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let clientCode of subscription.clients; let i = index; let last = last">
+                                        <td>
+                                            <ng-multiselect-dropdown [placeholder]="'Select Client Code'" [data]="aifClientMasters" [(ngModel)]="clientCode.aifClientMaster" [settings]="dropdownSettings1" (onSelect)="onItemSelect1($event, i)" (onSelectAll)="onSelectAll($event)" 
+                                                name="aifClientMaster-{{i}}" id="aifClientMaster-{{i}}" [ngModelOptions]="{standalone: true}">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                        <td>
+                                            <ng-multiselect-dropdown [placeholder]="'Select Client Name'" [data]="aifClientMasters" [(ngModel)]="clientCode.aifClientMaster1" [settings]="dropdownSettings2" (onSelect)="onItemSelect2($event, i)" (onSelectAll)="onSelectAll($event)" [multiple]="true" name="aifClientMaster1-{{i}}"
+                                                id="aifClientMaster1-{{i}}" [ngModelOptions]="{standalone: true}">
+                                            </ng-multiselect-dropdown>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Distributor" class="form-control" name="aifDist-{{i}}" id="aifDist-{{i}}" [(ngModel)]="clientCode.aifDist" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="No Of Units" class="form-control" name="noOfUnits-{{i}}" id="noOfUnits-{{i}}" [(ngModel)]="clientCode.noOfUnits" [ngModelOptions]="{standalone: true}" (keyup)="onValueChange($event, i)">
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Portfolio Value" class="form-control" name="protfolioValue-{{i}}" id="protfolioValue-{{i}}" [(ngModel)]="clientCode.protfolioValue" [ngModelOptions]="{standalone: true}">
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <button class="btn btn-default" *ngIf="last" type="button" (click)="addFieldValue(i)">Add Field</button>
+                                            <button class="btn btn-default" *ngIf="!last" type="button" (click)="deleteFieldValue(i)">
+                                        Delete Field
+                                    </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

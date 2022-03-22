@@ -1,0 +1,48 @@
+.jh-navbar {
+    background-color: #e7eaec;
+    height: 45px;
+    padding: 0.2em 1em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.dropdown-menu {
+    background-color: white;
+    color: black;
+    font-size: 14px;
+    box-shadow: 2px 1px 10px grey;
+}
+.dropdown-item {
+    color: black;
+}
+.fa,
+.fas,
+.fab {
+    margin: 4px 2px;
+    font-size: 14px;
+    float: left;
+}
+
+.jh-navbar .dropdown-toggle::after {
+    margin-left: 0.15em;
+}
+
+.jh-navbar ul.navbar-nav {
+    padding: 0.5em;
+}
+
+.jh-navbar .navbar-nav .nav-item {
+    margin-left: 1.5rem;
+}
+
+.jh-navbar a.nav-link {
+    font-weight: 400;
+    color: black !important;
+}
+.logo-img {
+    background: url('../../../content/images/unifi_logo_new.jpg') no-repeat;
+}
+.logo .logo-img {
+    height: 30px;
+    float: left;
+    width: 220px;
+}

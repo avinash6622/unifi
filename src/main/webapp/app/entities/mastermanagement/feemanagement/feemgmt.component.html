@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-md-3">
+        <jhi-app-mastermanagement></jhi-app-mastermanagement>
+    </div>
+    <div class="col-md-8 partition1">
+        <div>
+            <h3>Fee Management</h3>
+        </div>
+        <div class="partition2">
+            <form>
+                <div class="feedetails">
+                    <label for="feetype">FeeType</label>
+                    <select ng-model="feemgmt">
+                        <option value="blank">
+                        <option value="performancefee">Performance Fee
+                        <option value="managementfee">Management Fee
+                        <option value="otherfee">Other Fee
+                    </select>
+                    <br>
+                    <label for="strategy">Strategy</label>
+                    <select ng-model="myVar">
+                        <option value="blank">
+                        <option value="BCAD">BCAD
+                        <option value="AIF">AIF
+                        <option value="PMS">PMS
+                    </select>
+                <br>
+                <button class="btn btn-danger" (click)="reset()">Reset</button>
+                <button class="btn btn-success" (click)="save()">Save</button>
+                <br>
+            </div>
+            </form>
+            <span>
+                <div *ngIf="isSearchFound">
+                    <h3>Search Found!!!!</h3>
+                </div>
+            </span>
+        </div>
+    </div>
+</div>

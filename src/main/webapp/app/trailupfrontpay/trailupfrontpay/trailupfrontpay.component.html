@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-6">
+        <header class="mb-4">
+            <h2 class="h2 g-color-black g-font-weight-600 g-mt-15" style="margin-left: 25%;">Payment</h2>
+        </header>
+        <form #trailupfrontForm="ngForm" name="form" role="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white
+                g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="bankName" id="bankName" placeholder="Bank Name" [(ngModel)]="trailupfrontpay.bankName">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white
+                g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="paymentAmount" id="paymentAmount" placeholder="Payment Amount" [(ngModel)]="trailupfrontpay.paymentAmount">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control g-color-black g-bg-white
+                g-bg-white--focus g-brd-gray-light-v4 g-brd-primary--hover" name="chequeNo" id="chequeNo" placeholder="Cheque No" [(ngModel)]="trailupfrontpay.chequeNo">
+            </div>
+            <div class="form-group">
+                <select class="form-control" name="productName" [(ngModel)]="trailupfrontpay.productName">
+                    <option value=null>Select Product Name</option>
+                    <option value="AIF & PMS">AIF & PMS</option>
+                    <option value="BCAD">BCAD</option>
+                    <option value="AIF2">AIF2</option>
+                    <option value="AIF Blend">AIF Blend</option>
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="PaymentDate" class="form-control" bsDatepicker name="paymentDate" id="paymentDate" [(ngModel)]="trailupfrontpay.paymentDate" (input)="onDateChange($event)" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" placeholder="ChequeDate" class="form-control" bsDatepicker name="chequeDate" id="chequeDate" [(ngModel)]="trailupfrontpay.chequeDate" [bsConfig]="{dateInputFormat: 'YYYY-MM-DD'}" (input)="onDateChange1($event)">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <select class="form-control" name="paymentType" [(ngModel)]="trailupfrontpay.paymentType">
+                            <option value=null>Select Payment type</option>
+                            <option value="Upfront">Upfront</option>
+                            <option value="Trail">Trail</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <ng-multiselect-dropdown [placeholder]="'Select Distributor'" [data]="distributorMasters" [(ngModel)]="distributorMaster" [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)" name="distributorMaster">
+                        </ng-multiselect-dropdown>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+            <button type="button" data-dismiss="modal" class="btn btn-danger" (click)="cancel()">Cancel</button>
+        </form>
+    </div>
+</div>
